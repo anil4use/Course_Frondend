@@ -1,4 +1,4 @@
-import { Box, Button, Container, FormControl, FormLabel, Heading, Input, Text, Textarea, VStack } from '@chakra-ui/react'
+import { Box, Button, Container, FormControl, FormLabel, Heading, Input, Text, Textarea } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { toast } from 'react-hot-toast'
@@ -31,23 +31,22 @@ const Contact = () => {
         dispatch(ContactWithUs(name, email, desc));
     }
     return (
-        <Container h={'95vh'} maxW={'container.lg'} paddingY={'8'}>
+        <Container mt={'50'} h={'95vh'} paddingY={'8'}>
             <Heading textAlign={'center'}>Contact Us</Heading>
-            <VStack justifyContent={'center'} spacing={'16'} h={'400'}>
                 <Box >
                     <form onSubmit={SumbitHandler}>
-                        <FormControl w={'sm'} isInvalid={isError}>
+                        <FormControl w={'initial'} isInvalid={isError}>
                             <FormLabel>name</FormLabel>
                             <Input required placeholder='Jonh Dev' type='name' value={name} onChange={e => Setname(e.target.value)} />
                             <FormLabel>email</FormLabel>
                             <Input required placeholder='exampl@gamil.com' type='email' value={email} onChange={e => SetEamil(e.target.value)} />
+                            <FormLabel>Message</FormLabel>
                             <Textarea value={desc} onChange={e => Setdesc(e.target.value)} placeholder='Enter text here...' name="comment" form="usrform"></Textarea>
-                            <Button mt={'3'} isLoading={loading} colorScheme='linkedin' type='submit'> Contact Us</Button>
-                            <Text> Request a new course <Link to={"/requestcourse"}>   <Button variant={'link'} colorScheme='linkedin'>click</Button></Link>here</Text>
+                            <Button mt={'3'} isLoading={loading} color={'linkedin.300'} variant={'solid'} type='submit'> Contact Us</Button>
+                            <Text> Request a new course <Link to={"/requestcourse"}>   <Button color={'linkedin.300'} variant={'link'}>click</Button></Link>here</Text>
                         </FormControl>
                     </form>
                 </Box>
-            </VStack>
         </Container>
     )
 }

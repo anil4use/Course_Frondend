@@ -1,117 +1,117 @@
 import {
-    Button,
-    Card,
-    CardBody,
-    CardFooter,
-    Container,
-    Divider,
-    Grid,
-    GridItem,
-    HStack,
-    Heading,
-    Image,
-    Input,
-    Stack,
-    Text,
-  } from '@chakra-ui/react';
-  import React, { useEffect, useState } from 'react';
-  import { Link } from 'react-router-dom';
-  import { useDispatch, useSelector } from 'react-redux';
-  import { getAllCourse } from '../../redux/actions/CourseAction';
-  import { toast } from 'react-hot-toast';
-  
-  const Course = () => {
-    const { error, message, courses, loading } = useSelector(state => state.course);
-  
-    const Courese = ({ title, loading, CreatedBY, desc, views, lectures, id, imgSrc }) => {
-      return (
-        <GridItem mt={'4'}>
-          <Card maxW='72'>
-            <CardBody>
-              <Image
-                src={imgSrc}
-                alt='Course Poster'
-                borderRadius='lg'
-              />
-              <Stack mt='6' spacing='3'>
-                <Heading size='md'>{title}</Heading>
-                <Text>{desc}</Text>
-                <Text>Creater Name - {CreatedBY}</Text>
-                <HStack>
-                  <Text>Total Lectures --</Text>
-                  <Text>{lectures}</Text>
-                </HStack>
-                <HStack>
-                  <Text>Total views --</Text>
-                  <Text fontSize={'2xl'}>{views}</Text>
-                </HStack>
-              </Stack>
-            </CardBody>
-            <Divider />
-            <CardFooter>
-              {/* <Button isLoading={loading} onClick={() => addToPlayListHandler(id)} variant={'outline'} colorScheme='linkedin' mr={'2'}>
+  Box,
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Container,
+  Divider,
+  Grid,
+  GridItem,
+  HStack,
+  Heading,
+  Image,
+  Input,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCourse } from '../../redux/actions/CourseAction';
+import { toast } from 'react-hot-toast';
+
+const Course = () => {
+  const { error, message, courses, loading } = useSelector(state => state.course);
+
+  const Courese = ({ title, loading, CreatedBY, desc, views, lectures, id, imgSrc }) => {
+    return (
+      <GridItem  m={'auto'}  mt={'4'}>
+        <Card maxW='72'>
+          <CardBody>
+            <Image
+              src={imgSrc}
+              alt='Course Poster'
+              borderRadius='lg'
+            />
+            <Stack mt='6' spacing='3'>
+              <Heading size='md'>{title}</Heading>
+              <Text>{desc}</Text>
+              <Text>Creater Name - {CreatedBY}</Text>
+              <HStack>
+                <Text>Total Lectures --</Text>
+                <Text>{lectures}</Text>
+              </HStack>
+              <HStack>
+                <Text>Total views --</Text>
+                <Text fontSize={'2xl'}>{views}</Text>
+              </HStack>
+            </Stack>
+          </CardBody>
+          <Divider />
+          <CardFooter>
+            {/* <Button isLoading={loading} onClick={() => addToPlayListHandler(id)} variant={'outline'} colorScheme='linkedin' mr={'2'}>
                 Add To Play list
               </Button> */}
-              <Link to={`/course/${id}`}>
-                <Button isLoading={loading} color={'linkedin.300'} variant={'solid'}>
-                  Watch Now
-                </Button>
-              </Link>
-            </CardFooter>
-          </Card>
-        </GridItem>
-      );
-    };
-  
-    const [keyword, setKeyword] = useState('');
-    const [category, Setcategory] = useState('');
-    const dispatch = useDispatch();
-  
-    useEffect(() => {
-      if (error) {
-        toast.error(error);
-        dispatch({ type: 'cleareError' });
-      }
-      if (message) {
-        toast.success(message);
-        dispatch({ type: 'clearMessagge' });
-      }
-    }, [error, message, dispatch]);
-  
-    const categories = [
-      'web dovlopment',
-      'data Scintece',
-      'c &c++ full course',
-      'python basic',
-      'java tetouril',
-      'web dovlopment',
-      'python adwand',
-    ];
-  
-    // const addToPlayListHandler = CourseID => {
-    //   dispatch(AddToPlayList(CourseID));
-    // };
-  
-    useEffect(() => {
-      dispatch(getAllCourse(category, keyword));
-    }, [category, keyword, dispatch]);
-  
-    return (
-      <>
-        <Container maxh={'95vh'} maxW={'container.lg'} paddingY={'8'}>
-          <Heading m={'4'} textAlign={'center'}>
-            All course
-          </Heading>
-          <Input type='text' value={keyword} onChange={e => setKeyword(e.target.value)} m={'1'} placeholder='Search Courses' size={'lg'} />
-          <HStack value={category} className='category_hide' mt={'4'} justifyContent={['center']} overflow={'auto'} textAlign={['start']}>
-            {categories.map((cat, i) => (
-              <Button key={i} onClick={() => Setcategory(cat)} minW={'60'}>
-                <Text>{cat}</Text>
+            <Link to={`/course/${id}`}>
+              <Button isLoading={loading} color={'linkedin.300'} variant={'solid'}>
+                Watch Now
               </Button>
-            ))}
-          </HStack>
-  
-          <Grid justifyContent={["center", 'flex-start']} alignItems={['center', 'flex-start']} mt={'4'} templateColumns={['repeat(1,1fr)', 'repeat(3,1fr)']} gap={4}>
+            </Link>
+          </CardFooter>
+        </Card>
+      </GridItem>
+    );
+  };
+
+  const [keyword, setKeyword] = useState('');
+  const [category, Setcategory] = useState('');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: 'cleareError' });
+    }
+    if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessagge' });
+    }
+  }, [error, message, dispatch]);
+
+  const categories = [
+    // 'web dovlopment',
+    'data Scintece',
+    'C & C++ full course',
+    'Python basic',
+    'java tetouril',
+    'web dovlopment',
+    'Machine Lernig',
+  ];
+
+  // const addToPlayListHandler = CourseID => {
+  //   dispatch(AddToPlayList(CourseID));
+  // };
+
+  useEffect(() => {
+    dispatch(getAllCourse(category, keyword));
+  }, [category, keyword, dispatch]);
+
+  return (
+    <>
+      <Container maxh={'95vh'} maxW={'container.lg'} paddingY={'8'}>
+        <Heading m={'4'} textAlign={'center'}>
+          All course
+        </Heading>
+        <Input type='text' value={keyword} onChange={e => setKeyword(e.target.value)} m={'1'} placeholder='Search Courses' size={'lg'} />
+        <HStack value={category} className='category_hide' mt={'4'} justifyContent={['center']} overflow={'auto'} textAlign={['start']}>
+          {categories.map((cat, i) => (
+            <Button key={i} onClick={() => Setcategory(cat)} minW={'60'}>
+              <Text>{cat}</Text>
+            </Button>
+          ))}
+        </HStack>
+          <Grid justifyContent={["", 'flex-start']} alignItems={['', 'flex-start']} mt={'4'} templateColumns={['repeat(1,1fr)', 'repeat(3,1fr)']} gap={4}>
             {courses && courses.length > 0 ? (
               courses.map(e => (
                 <Courese
@@ -133,10 +133,10 @@ import {
               </Heading>
             )}
           </Grid>
-        </Container>
-      </>
-    );
-  };
-  
-  export default Course;
-  
+
+      </Container>
+    </>
+  );
+};
+
+export default Course;

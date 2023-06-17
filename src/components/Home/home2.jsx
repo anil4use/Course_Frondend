@@ -1,4 +1,6 @@
-import { Box, Container, Heading, Text, Grid, GridItem, Image } from "@chakra-ui/react";
+import { Box, Container, Heading, Text, Grid, GridItem, Image, HStack } from "@chakra-ui/react";
+import { CgGoogle, CgYoutube, SiCoursera, SiUdemy, DiAws } from 'react-icons/all'
+
 import React from "react";
 import image3 from '../../assets/imges/imge3.jpg'
 import in_video from '../../assets/video/intro-video.mp4'
@@ -6,20 +8,20 @@ import in_video from '../../assets/video/intro-video.mp4'
 const Home2 = () => {
     return (
         <Box>
-            <Box as="header" bg={'blackAlpha.800'} py={8} color="white">
+            <Box >
                 {/* Hero section */}
-                <Container  maxW="container.xl">
-                    <Heading as="h1" size="xl" mb={4}>
-                        Free Course RR
-                    </Heading>
-                    <Text fontSize="lg">
-                        - Join thousands of students worldwide who have already benefited from this course.
-                        - Receive lifetime access to course updates and new content additions.
-
-                        Enroll now and take your skills to the next level!
-                    </Text>
-
-                </Container>
+                  
+                   
+                    <Box textAlign={'center'} bg={'blackAlpha.800'} padding={'4'} alignItems={'center'} w='100%' p={4} color='linkedin.400'>
+                        <Heading>Our Brands</Heading>
+                        <HStack marginTop={'4'} className='brand_banner' justifyContent={'space-evenly'}>
+                            <CgGoogle />
+                            <CgYoutube />
+                            <SiCoursera />
+                            <SiUdemy />
+                            <DiAws />
+                        </HStack>
+                    </Box>
             </Box>
 
             <Box as="section" py={8}>
@@ -54,19 +56,19 @@ const Home2 = () => {
                                     <Heading> Course Duration: 8 weeks Free Coures RR</Heading>
 
                                     In this course, you will:
-                                    - Explore advanced techniques and strategies inALIMITED.
+                                    - Explore advanced techniques and strategies in ALIMITED.
                                     - Dive deep into industry best practices and real-world case studies.
-                                    - Develop a strong foundation inALIMITED concepts and methodologies.
-                                    - Learn how to effectively useALIMITED tools and software.
+                                    - Develop a strong foundation in ALIMITED concepts and methodologies.
+                                    - Learn how to effectively use ALIMITED tools and software.
 
 
                                     Who should enroll:
-                                    - Professionals looking to upskill and advance their careers inALIMITED.
-                                    - Students pursuing a degree inALIMITED or related fields.
-                                    - Individuals interested in starting a career inALIMITED.
+                                    - Professionals looking to upskill and advance their careers in ALIMITED.
+                                    - Students pursuing a degree in ALIMITED or related fields.
+                                    - Individuals interested in starting a career in ALIMITED.
                                     - Anyone passionate about learning and exploring new technologies.
 
-                                    By the end of this course, you will have the knowledge and skills to tackle complexALIMITED challenges and make a meaningful impact in your professional journey. Join us now and unlock your potential in the exciting world ofALIMITED!
+                                    By the end of this course, you will have the knowledge and skills to tackle complex ALIMITED challenges and make a meaningful impact in your professional journey. Join us now and unlock your potential in the exciting world of ALIMITED!
 
                                 </Text>
                             </Box>

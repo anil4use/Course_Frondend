@@ -25,7 +25,7 @@ const ChangePassword = () => {
                 <Input focusBorderColor='linkedin.400' value={oldPassword} onChange={e => SetoldPassword(e.target.value)} />
                 <FormLabel>Inter Your New Password</FormLabel>
                 <Input focusBorderColor='linkedin.400' value={newPassword} onChange={e => SetnewPassword(e.target.value)} />
-                <Button type='submit' variant={'solid'} colorScheme='linkedin'>Save Changes</Button>
+                <Button type='submit' color={'linkedin.300'} variant={'solid'}>Save Changes</Button>
               </Stack>
 
             </FormControl>

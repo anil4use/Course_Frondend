@@ -25,7 +25,7 @@ const Deshbord = () => {
     dispatch(AdminStatsDATA())
   }, [dispatch])
 
-  const Time = String(new Date(new Date(stats[11].creatredAt)))
+  const Time = String(new Date(new Date()))
 
   const DataBox = ({ tittle, qnt, qntPercentage, profit }) => (
    <Box w={['full', '26%']} boxShadow={'2px 0 10px rgba(107,10,10,0.5)'} p={'8'} borderRadius={'lg'}>

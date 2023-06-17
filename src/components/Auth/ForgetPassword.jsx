@@ -20,7 +20,7 @@ const ForgetPassward = () => {
                             <FormLabel textAlign={'left'}>email</FormLabel>
                             <Input width={'sm'} required placeholder='exampl@gamil.com' type='email' value={email} onChange={e => SetEamil(e.target.value)} />
                             <HStack alignItems={'center'} justifyContent={'space-evenly'}>
-                                <Button mt={'3'} colorScheme='linkedin' type='submit' >Send Reset Link </Button>
+                                <Button mt={'3'} color={'linkedin.300'} variant={'solid'} type='submit' >Send Reset Link </Button>
                             </HStack>
                         </FormControl>
                     </form>

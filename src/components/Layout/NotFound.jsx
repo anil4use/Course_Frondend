@@ -9,7 +9,7 @@ const NotFound = () => {
   <VStack h={'96vh'} maxH={'container.xl'}>
     <Text textAlign={'center'} fontSize={'200'}>404</Text>
     <Heading mt={'3'} textAlign={'center'} fontSize={'100'}>Page not Found</Heading>
-    <Text>  back to home <Link to={"/"}>   <Button variant={'link'} colorScheme='linkedin' >click</Button></Link>here</Text>
+    <Text>  back to home <Link to={"/"}>   <Button color={'linkedin.300'} variant={'solid'}>click</Button></Link>here</Text>
 
   </VStack>
     </>

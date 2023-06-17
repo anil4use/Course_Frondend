@@ -1,45 +1,64 @@
-import { Box, Button, HStack, Stack, Text } from '@chakra-ui/react'
-import React from 'react'
-import { CgInstagram, CgYoutube, AiFillGithub, FaLinkedinIn, GrTwitter, AiOutlineWhatsApp } from 'react-icons/all'
-import { Link } from 'react-router-dom'
-import '../Home/home.css'
+import {
+    Box,
+    chakra,
+    Container,
+    Stack,
+    Text,
+    VisuallyHidden,
+} from '@chakra-ui/react';
+import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+//   import { ReactNode } from 'react';
 
-const Footer = () => {
+const SocialButton = ({ children, label, href }) => (
+    <chakra.button
+        rounded={'full'}
+        w={8}
+        h={8}
+        cursor={'pointer'}
+        as={'a'}
+        href={href}
+        display={'inline-flex'}
+        alignItems={'center'}
+        justifyContent={'center'}
+        transition={'background 0.3s ease'}
+        _hover={{
+        }}
+    >
+        <VisuallyHidden>{label}</VisuallyHidden>
+        {children}
+    </chakra.button>
+);
+
+export default function Footer() {
     return (
-        <>
-            <Box variant="outline"
-                color="white" bg={'blackAlpha.800'} w='100%' p={4} textAlign={'center'} justifyContent={'center'} >
-                <Stack direction={['column', 'row']} justifyContent={'space-between'}>
-                    <HStack alignItems={'center'}>
-                        <Link to={"/"}> <Button className='footer_icon' colorScheme='pink' variant={'outline'}> <CgInstagram /> </Button>  </Link>
-                        <Link to={"/"}> <Button className='footer_icon' colorScheme='whatsapp' variant={'outline'}> <AiOutlineWhatsApp /> </Button>  </Link>
-                        <Link to={"/"}> <Button className='footer_icon' colorScheme='twitter' variant={'outline'}> <GrTwitter /> </Button>  </Link>
-                        <Link to={"/"}> <Button className='footer_icon' colorScheme='red' variant={'outline'}> <CgYoutube /> </Button>  </Link>
-                        <Link to={"/"}> <Button className='footer_icon' colorScheme='pink' variant={'outline'}> <AiFillGithub /> </Button>  </Link>
-                        <Link to={"/"}> <Button className='footer_icon' colorScheme='linkedin' variant={'outline'}> <FaLinkedinIn /> </Button>  </Link>
-                    </HStack>
-                    <HStack>
-                        <Text mb={'1'} as={'h4'} children="© Copyright 2023 by Refsnes Data. All Rights Reserved." />
-                    </HStack>
-                    <HStack spacing={"4"}>
-                        <Link to={"/about"}>
-                            <Text>About me</Text>
-                        </Link>
-                        <Link to={"/contact"}>
-                            <Text>Contact us</Text>
-                        </Link>
-                        <Link to={"/Course"}>
-                            <Text>Course</Text>
-                        </Link>
-                        <Link to={"/profile"}>
-                            <Text>Profile</Text>
-                        </Link>
-                     
-                    </HStack>
+        <Box
+            bg={'blackAlpha.800'}
+            color={('gray.50')}
+        >
+            <Container
+                as={Stack}
+                maxW={'6xl'}
+                py={4}
+                direction={{ base: 'column', md: 'row' }}
+                spacing={4}
+                justify={{ base: 'center', md: 'space-between' }}
+                align={{ base: 'center', md: 'center' }}
+            >
+                <Stack direction={'row'} spacing={6}>
+                    <SocialButton label={'Twitter'} href={'#'}>
+                        <FaTwitter />
+                    </SocialButton>
+                    <SocialButton label={'YouTube'} href={'#'}>
+                        <FaYoutube />
+                    </SocialButton>
+                    <SocialButton label={'Instagram'} href={'#'}>
+                        <FaInstagram />
+                    </SocialButton>
                 </Stack>
-            </Box>
-        </>
-    )
-}
+                <Text textAlign={'center'} fontWeight={'semibold'} fontSize={'md'}>Design and Develop by --ANIL</Text>
+                <Text textAlign={'center'} fontWeight={'bold'} fontSize={'md'}>© 2022 Chakra Templates. All rights reserved</Text>
 
-export default Footer
+            </Container>
+        </Box>
+    );
+}

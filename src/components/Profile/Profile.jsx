@@ -74,15 +74,15 @@ const Profile = () => {
           </VStack>
           <VStack justifyContent={['flex-start', '']} alignItems={['flex-start', 'flex-start']}>
             <HStack>
-              <Text >name-</Text>
+              <Text >Name-</Text>
               <Text fontWeight={'bold'}>{` ${user.name}`}</Text>
             </HStack>
             <HStack>
-              <Text >email-</Text>
+              <Text >Email-</Text>
               <Text fontWeight={'bold'}>{` ${user.email}`}</Text>
             </HStack>
             <HStack>
-              <Text >Created AT-</Text>
+              <Text >Join with us-</Text>
               <Text fontWeight={'bold'}> {` ${user.CreateAT.toString().slice(0, 10)}`}</Text>
             </HStack>
             {

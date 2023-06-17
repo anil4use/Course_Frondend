@@ -40,9 +40,9 @@ const Login = () => {
                                 </Link> */}
                             <br></br>
 
-                            <Button mt={'3'} colorScheme='linkedin' type='submit'>login Now</Button>
+                            <Button mt={'3'} color={'linkedin.300'} variant={'solid'} type='submit'>login Now</Button>
 
-                            <Text> You don't have a accout <Link to={"/register"}>   <Button variant={'link'} colorScheme='linkedin' onClick={forgetHandler}>click</Button></Link>here</Text>
+                            <Text> You don't have a accout <Link to={"/register"}>   <Button color={'linkedin.300'} variant={'solid'} onClick={forgetHandler}>click</Button></Link>here</Text>
 
                         </FormControl>
                     </form>
