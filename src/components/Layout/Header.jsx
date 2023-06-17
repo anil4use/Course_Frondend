@@ -39,6 +39,7 @@ const Header = ({ isAuthenticated, user }) => {
     const UserLogoutHandler = () => {
         // console.log("logout")
         dispatch(LogoutUser())
+        onClose() 
     }
 
 
@@ -91,25 +92,25 @@ const Header = ({ isAuthenticated, user }) => {
                             <HStack justifyContent={'space-between'} bottom={["24", "4"]} position={'absolute'} >
                                 {isAuthenticated ? (<>
                                     <Link to={'/profile'}>
-                                        <Button marginLeft={'4rem'} variant='solid'><CgProfile /></Button>
+                                        <Button onClick={onClose}  marginLeft={'4rem'} variant='solid'><CgProfile /></Button>
                                     </Link>
                                     <Link>
-                                        <Button onClick={UserLogoutHandler} marginLeft={'1rem'} variant='ghost'><IoIosLogOut /></Button>
+                                        <Button  onClick={UserLogoutHandler} marginLeft={'1rem'} variant='ghost'><IoIosLogOut /></Button>
                                     </Link>
 
                                     <br />
                                     {user && user.role === "admin" && (
                                         <Link to={"admin/deshbord"}>
-                                            <Button colorScheme='purple' marginLeft={'3rem'} variant={'ghost'}><RiDashboardFill /></Button>
+                                            <Button onClick={onClose}  colorScheme='purple' marginLeft={'3rem'} variant={'ghost'}><RiDashboardFill /></Button>
                                         </Link>
                                     )}
                                 </>) : (<>
                                     <Link to={'/login'}>
-                                        <Button color={'linkedin.300'} variant={'solid'}>Login</Button>
+                                        <Button onClick={onClose}  color={'linkedin.300'} variant={'solid'}>Login</Button>
                                     </Link>
                                     <span>Or</span>
                                     <Link to={'/register'}>
-                                        <Button color={'linkedin.300'} variant={'solid'}>Sign Up</Button>
+                                        <Button onClick={onClose}  color={'linkedin.300'} variant={'solid'}>Sign Up</Button>
                                     </Link>
                                 </>)}
                             </HStack>

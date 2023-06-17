@@ -1,4 +1,4 @@
-import { Box, Button, Container, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, Container, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Text, } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -17,13 +17,12 @@ const Login = () => {
         dispatch(login(Email, Password));
     }
     return (
-        <Container h={'95vh'} maxW={'container.lg'} paddingY={'8'}>
+        <Container mt={'50'} h={'95vh'} paddingY={'16'}>
             <Heading textAlign={'center'}>Free Course RR LOGIN</Heading>
 
-            <VStack justifyContent={'centr'} spacing={'16'} h={'400'}>
-                <Box p={4} >
+                <Box  p={4} >
                     <form onSubmit={SumbitHandler} >
-                        <FormControl w={'sm'} isInvalid={isError}>
+                        <FormControl  isInvalid={isError}>
                             <FormLabel>Email</FormLabel>
                             <Input required placeholder='exampl@gamil.com' type='email' value={Email} onChange={e => SetEamil(e.target.value)} />
                             {!isError ? (
@@ -42,12 +41,11 @@ const Login = () => {
 
                             <Button mt={'3'} color={'linkedin.300'} variant={'solid'} type='submit'>login Now</Button>
 
-                            <Text> You don't have a accout <Link to={"/register"}>   <Button color={'linkedin.300'} variant={'solid'} onClick={forgetHandler}>click</Button></Link>here</Text>
+                            <Text m={'4'}> You don't have a accout <Link to={"/register"}>   <Button color={'linkedin.300'} variant={'link'} onClick={forgetHandler}>click</Button></Link>here</Text>
 
                         </FormControl>
                     </form>
                 </Box>
-            </VStack>
 
 
         </Container>

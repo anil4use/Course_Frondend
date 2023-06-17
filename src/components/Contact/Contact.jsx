@@ -36,9 +36,9 @@ const Contact = () => {
                 <Box >
                     <form onSubmit={SumbitHandler}>
                         <FormControl w={'initial'} isInvalid={isError}>
-                            <FormLabel>name</FormLabel>
+                            <FormLabel>Name</FormLabel>
                             <Input required placeholder='Jonh Dev' type='name' value={name} onChange={e => Setname(e.target.value)} />
-                            <FormLabel>email</FormLabel>
+                            <FormLabel>Email</FormLabel>
                             <Input required placeholder='exampl@gamil.com' type='email' value={email} onChange={e => SetEamil(e.target.value)} />
                             <FormLabel>Message</FormLabel>
                             <Textarea value={desc} onChange={e => Setdesc(e.target.value)} placeholder='Enter text here...' name="comment" form="usrform"></Textarea>

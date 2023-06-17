@@ -46,9 +46,9 @@ const RequestCourse = () => {
                 <Box >
                     <form onSubmit={SumbitHandler}>
                         <FormControl w={'-moz-initial'} isInvalid={isError}>
-                            <FormLabel>name</FormLabel>
+                            <FormLabel>Name</FormLabel>
                             <Input required placeholder='Jonh Dev' type='name' value={name} onChange={e => Setname(e.target.value)} />
-                            <FormLabel>email</FormLabel>
+                            <FormLabel>Email</FormLabel>
                             <Input required placeholder='exampl@gamil.com' type='email' value={email} onChange={e => SetEamil(e.target.value)} />
                             <FormLabel>Coures details</FormLabel>
                             <Textarea value={course} onChange={e => Setcourse(e.target.value)} placeholder='Enter text here...' name="comment" form="usrform"></Textarea>

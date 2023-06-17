@@ -37,7 +37,7 @@ const Register = () => {
     return (
         <Container h={'95vh'} maxW={'container.lg'} paddingY={'14'}>
             <Heading textAlign={'center'}>Free Course RR</Heading>
-            <VStack justifyContent={'center'} spacing={'16'} h={'500'}>
+            <VStack justifyContent={'center'} spacing={'20'} h={'500'}>
                 <Box >
                     <form onSubmit={registerHandler}>
                         <FormControl w={'-moz-min-content'} isInvalid={isError}>
@@ -60,7 +60,7 @@ const Register = () => {
                             <FormLabel>Choose a Avtar</FormLabel>
                             <Input className='inputAvtar' accept='image/*' id='avtar' onChange={AvtarHandler} type='file' required />
                             <Button mt={'3'} color={'linkedin.300'} variant={'solid'} type='submit' >Sign UP</Button>
-                            <Text> You have a accout <Link to={"/login"}>   <Button color={'linkedin.300'} variant={'solid'} onClick={LoginHandler}>click</Button></Link>here</Text>
+                            <Text> You have a accout <Link to={"/login"}>   <Button color={'linkedin.300'} variant={'link'} onClick={LoginHandler}>click</Button></Link>here</Text>
                         </FormControl>
                     </form>
                 </Box>

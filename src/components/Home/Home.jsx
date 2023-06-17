@@ -14,40 +14,42 @@ const Home = () => {
           justifyContent={["center", "space-between"]}
           alignItems={"center"}>
           <VStack width={'full'} alignItems={["center", "flex-end"]}>
-            <Text mt={['30','']} textAlign={['center','']} fontSize={['6xl', "5xl"]}>LEARN FORM EXPERTS </Text>
+            <Text mt={['16', '']} textAlign={['center', '']} fontSize={['6xl', "5xl"]}>LEARN FORM EXPERTS </Text>
             <Text mt={["8", '0']} children="find the reabile contect there" />
             <Link to="/course">
-              <Button mt={"16"} bottom={["20pxs"]} size={'lg'} color={'linkedin.300'} variant={'solid'}>
+              <Button mt={"7"} bottom={["20pxs"]} size={'lg'} color={'linkedin.300'} variant={'solid'}>
                 Exprole Courses
               </Button>
             </Link>
           </VStack>
+          <Box  boxSize={['72','xl']}>
+            <Image mt={'-2'} mb={'30'} className='img_in_front' boxSize={['full', ""]} src={vg} objectFit={'contain'}>
+            </Image>
+          </Box>
 
-          <Image  className='img_in_front' boxSize={['full',"md"]} src={vg} objectFit={'contain'}>
-          </Image>
         </Stack>
       </div>
-      <Box as="header" bg={'blackAlpha.800'} py={8} color="white">
+      <Box mt={'20'} as="header" bg={'blackAlpha.800'} py={8} color="white">
 
-      <Container maxW="container.xl">
-        <Heading as="h1" size="xl" mb={4}>
-          Free Course RR
-        </Heading>
-        <Text fontSize="lg">
-          - Join thousands of students worldwide who have already benefited from this course.
-          - Receive lifetime access to course updates and new content additions.
+        <Container maxW="container.xl">
+          <Heading as="h1" size="xl" mb={4}>
+            Free Course RR
+          </Heading>
+          <Text fontSize="lg">
+            - Join thousands of students worldwide who have already benefited from this course.
+            - Receive lifetime access to course updates and new content additions.
 
-          Enroll now and take your skills to the next level!
-        </Text>
+            Enroll now and take your skills to the next level!
+          </Text>
 
-      </Container>
+        </Container>
       </Box>
       <div className="container2">
         <video
           autoPlay
           muted
           loop
-        
+
           controls controlsList='nodownload nofullscreen noremoteplayback'
           disablePictureInPicture
           disableRemotePlayback
