@@ -2,29 +2,42 @@ import React from 'react'
 
 
 import AdminSlliderbar from './Deshbord/AdminSliderbar'
-import { Box, Button, Grid, HStack, Heading, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { Box, Button, Grid, HStack, Heading, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
 import { RiDeleteBinFill } from 'react-icons/ri'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { ChangeUserRoleAdmin, DeleteUserAdmin, GetAllUsersAdmin } from '../../redux/actions/AdminAction'
+import { toast } from 'react-hot-toast'
 const Users = () => {
-  const users = [{
-    _id: "asdfksdlfjsafsdfsladfk",
-    Name: "Anil",
-    Email: "enail@gmial",
-    Role: "user",
-    Subscription: {
-      status: "active"
-    },
+  const { users, loading, error, message } = useSelector(state => state.admin);
+  const dispatch = useDispatch();
+  const ChangeUserrole = (userid) => {
+    dispatch(ChangeUserRoleAdmin(userid))
+    dispatch(GetAllUsersAdmin());
   }
-]
-const ChangeUserRole=(userid)=>{
-  console.log(userid)
-}
-const DeleteUsers=(userid)=>{
-  console.log(userid)
-}
+  const DeleteUsers = (userid) => {
+    // console.log(userid)
+    dispatch(DeleteUserAdmin(userid))
+    dispatch(GetAllUsersAdmin());
+  }
+  useEffect(() => {
+    if (error) {
+      toast.error(error)
+      dispatch({ type: 'cleareError' })
+    }
+    if (message) {
+      toast.success(message)
+      dispatch({ type: 'clearMessagge' })
+    }
+  },
+    [dispatch, error, message]);
+
+  useEffect(() => {
+    dispatch(GetAllUsersAdmin());
+  }, [dispatch]);
 
   return (
     <>
-
       <Grid minH={'100vh'} templateColumns={['1fr', '5fr 1fr']}>
         <Box p={['0', '16']} overflowX={'auto'}>
           <Heading textAlign={'center'}>All Users</Heading>
@@ -33,19 +46,20 @@ const DeleteUsers=(userid)=>{
               <TableCaption>All Availabele users in Database</TableCaption>
               <Thead>
                 <Tr>
+                  <Th>NO.</Th>
                   <Th>id</Th>
-                  <Th>Name</Th>
+                  <Th>name</Th>
                   <Th>Eamail</Th>
-                  <Th>Role</Th>
+                  <Th>role</Th>
                   <Th>Subscription</Th>
                   <Th isNumeric>Action</Th>
                 </Tr>
               </Thead>
               <Tbody>
-                {
-                  users.map((item) => (
-                    <Row ChangeUserRole={ChangeUserRole} DeleteUsers={DeleteUsers} key={item._id} item={item}  />
-                  ))
+                {users ? (
+                  users && users.map((item, i) => (
+                    <Row ChangeUserrole={ChangeUserrole} i={i} loading={loading} DeleteUsers={DeleteUsers} key={item._id} item={item} />
+                  ))) : (<Text>no User</Text>)
                 }
               </Tbody>
             </Table>
@@ -56,20 +70,20 @@ const DeleteUsers=(userid)=>{
     </>
   )
 }
-
 export default Users;
-function Row({ item,ChangeUserRole,DeleteUsers }) {
+function Row({ item, i,loading, ChangeUserrole, DeleteUsers }) {
   return (
     <Tr>
+      <Td>#{i + 1}</Td>
       <Td>#{item._id}</Td>
-      <Td>{item.Name}</Td>
-      <Td>{item.Email}</Td>
-      <Td>{item.Role}</Td>
-      <Td>{item.Subscription.status === 'active' ? 'Active' : 'Nor Active'}</Td>
+      <Td>{item.name}</Td>
+      <Td>{item.email}</Td>
+      <Td>{item.role}</Td>
+      <Td>{item.subscription && item.subscription.status === 'active' ? 'Active' : 'Not Active'}</Td>
       <Td isNumeric>
         <HStack justifyContent={'flex-end'}>
-          <Button variant={'outline'} onClick={()=>ChangeUserRole(item._id)} color={'linkedin.300'}>Change Role</Button>
-          <Button variant={'outline'} onClick={()=>DeleteUsers(item._id)}color={'linkedin.500'}><RiDeleteBinFill /></Button>
+          <Button variant={'outline'} onClick={() => ChangeUserrole(item._id)} color={'linkedin.300'}>Change role</Button>
+          <Button isLoading={loading} variant={'outline'} onClick={() => DeleteUsers(item._id)} color={'linkedin.500'}><RiDeleteBinFill /></Button>
         </HStack>
       </Td>
     </Tr>

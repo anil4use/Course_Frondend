@@ -1,74 +1,142 @@
-import { Button, Container, Grid, GridItem, HStack, Heading, Image, Input, Stack, Text, VStack } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import python from '../../assets/imges/python.jpg'
-import { Link } from 'react-router-dom';
-
-const Course = () => {
-  // const {course,setCourse}=useState["d"]
-  const [keyword, setKeyword ]  = useState("ss");
-  const [ Cetegories, SetCetegories ] = useState("s")
-  const Cetegori = [
-    "web dovlopment", "data Scintece", "c &c++ full course", "python basic", "java tetouril", "web dovlopment", "python adwand"
-  ]
-const addToPlayListHandler=()=>{
-  console.log("playlist added succusfully")
-}
-  const Courese = ({ title, CreatedBY, desc, views, lectures, id, imgSrc, addToPlayList }) => {
+import {
+    Button,
+    Card,
+    CardBody,
+    CardFooter,
+    Container,
+    Divider,
+    Grid,
+    GridItem,
+    HStack,
+    Heading,
+    Image,
+    Input,
+    Stack,
+    Text,
+  } from '@chakra-ui/react';
+  import React, { useEffect, useState } from 'react';
+  import { Link } from 'react-router-dom';
+  import { useDispatch, useSelector } from 'react-redux';
+  import { getAllCourse } from '../../redux/actions/CourseAction';
+  import { toast } from 'react-hot-toast';
+  
+  const Course = () => {
+    const { error, message, courses, loading } = useSelector(state => state.course);
+  
+    const Courese = ({ title, loading, CreatedBY, desc, views, lectures, id, imgSrc }) => {
+      return (
+        <GridItem mt={'4'}>
+          <Card maxW='72'>
+            <CardBody>
+              <Image
+                src={imgSrc}
+                alt='Course Poster'
+                borderRadius='lg'
+              />
+              <Stack mt='6' spacing='3'>
+                <Heading size='md'>{title}</Heading>
+                <Text>{desc}</Text>
+                <Text>Creater Name - {CreatedBY}</Text>
+                <HStack>
+                  <Text>Total Lectures --</Text>
+                  <Text>{lectures}</Text>
+                </HStack>
+                <HStack>
+                  <Text>Total views --</Text>
+                  <Text fontSize={'2xl'}>{views}</Text>
+                </HStack>
+              </Stack>
+            </CardBody>
+            <Divider />
+            <CardFooter>
+              {/* <Button isLoading={loading} onClick={() => addToPlayListHandler(id)} variant={'outline'} colorScheme='linkedin' mr={'2'}>
+                Add To Play list
+              </Button> */}
+              <Link to={`/course/${id}`}>
+                <Button isLoading={loading} color={'linkedin.300'} variant={'solid'}>
+                  Watch Now
+                </Button>
+              </Link>
+            </CardFooter>
+          </Card>
+        </GridItem>
+      );
+    };
+  
+    const [keyword, setKeyword] = useState('');
+    const [category, Setcategory] = useState('');
+    const dispatch = useDispatch();
+  
+    useEffect(() => {
+      if (error) {
+        toast.error(error);
+        dispatch({ type: 'cleareError' });
+      }
+      if (message) {
+        toast.success(message);
+        dispatch({ type: 'clearMessagge' });
+      }
+    }, [error, message, dispatch]);
+  
+    const categories = [
+      'web dovlopment',
+      'data Scintece',
+      'c &c++ full course',
+      'python basic',
+      'java tetouril',
+      'web dovlopment',
+      'python adwand',
+    ];
+  
+    // const addToPlayListHandler = CourseID => {
+    //   dispatch(AddToPlayList(CourseID));
+    // };
+  
+    useEffect(() => {
+      dispatch(getAllCourse(category, keyword));
+    }, [category, keyword, dispatch]);
+  
     return (
       <>
-
-        <Grid mt={'4'} templateColumns={['repeat(1,1fr)', 'repeat(3,1fr)']} gap={6}>
-          <GridItem >
-            <VStack boxShadow={'dark-lg'} bgColor={'blackAlpha.100'} className='Course' objectFit={'contain'} alignItems={["center", "flex-start"]}>
-              <Image  src={imgSrc} objectFit={'contain'} boxSize={'60'} />
-              <Heading textAlign={['center', 'left']} maxW='220px' fontSize={'2xl'} noOfLines={2}>{title}</Heading>
-              <Text textAlign={['center', 'left']} maxW={'220px'} fontSize={'lg'} children={desc} noOfLines={3} />
-              <Text textTransform={'uppercase'} textAlign={['center', 'left']} maxW={'200px'} colorScheme='body'> {`Created by-${CreatedBY} `}</Text>
-              <Text fontWeight={'thin'} textAlign={'center'}>{`views- ${views}`}</Text>
-              <Text textAlign={'center'}>{`Lectures- ${lectures}`}</Text>
-              <Stack direction={['column', 'row']} alignItems={'center'}>
-                <Link to={`/course:${id}`} > <Button colorScheme='linkedin' onClick={() => console.log("clied")}>watch now </Button></Link>
-                <Button  colorScheme='linkedin' variant={'ghost'} onClick={(id) => addToPlayListHandler(id)}>Add to playList </Button>
-              </Stack>
-            </VStack>
-          </GridItem>
-        </Grid>
-      </>
-    )
-
-  }
-  return (
-    <>
-      <Container maxh={'95vh'} maxW={'container.lg'} paddingY={'8'}>
-{/* <Heading>{Cetegories}</Heading> */}
-        <Heading m={''} textAlign={'center'}>All course</Heading>
-        <Input type='text' value={keyword} onChange={e => setKeyword(e.target.value)} m={'1'} placeholder='Search Courses' size={'lg'} />
-        <HStack  value={Cetegories} className='category_hide' mt={'4'} justifyContent={['center']} overflow={'auto'} textAlign={['start']} >
-          {
-            Cetegori.map((cat, i) => {
-              return <Button key={i}  onClick={() => SetCetegories(cat)} minW={'60'}>
+        <Container maxh={'95vh'} maxW={'container.lg'} paddingY={'8'}>
+          <Heading m={'4'} textAlign={'center'}>
+            All course
+          </Heading>
+          <Input type='text' value={keyword} onChange={e => setKeyword(e.target.value)} m={'1'} placeholder='Search Courses' size={'lg'} />
+          <HStack value={category} className='category_hide' mt={'4'} justifyContent={['center']} overflow={'auto'} textAlign={['start']}>
+            {categories.map((cat, i) => (
+              <Button key={i} onClick={() => Setcategory(cat)} minW={'60'}>
                 <Text>{cat}</Text>
               </Button>
-            })
-          }
-        </HStack>
-
-        <Stack direction={["column", "row"]} flexWrap={'wrap'}
-          justifyContent={["flex-start", 'space-evenly']}
-          alignItems={['center', 'flex-start']}>
-          <Courese
-            title={"Course of Talent"}
-            views={12}
-            addToPlayList={"add"}
-            desc={"this is  amazing course"}
-            id={1221}
-            imgSrc={python}
-            lectures={12}
-            CreatedBY={"Anil"} />
-        </Stack>
-      </Container>
-    </>
-  )
-}
-
-export default Course
+            ))}
+          </HStack>
+  
+          <Grid justifyContent={["center", 'flex-start']} alignItems={['center', 'flex-start']} mt={'4'} templateColumns={['repeat(1,1fr)', 'repeat(3,1fr)']} gap={4}>
+            {courses && courses.length > 0 ? (
+              courses.map(e => (
+                <Courese
+                  key={e._id}
+                  title={e.title}
+                  views={e.views}
+                  desc={e.descripaton}
+                  id={e._id}
+                  imgSrc={e.poster.url}
+                  lectures={e.NumberofVideos}
+                  CreatedBY={e.createBY}
+                  loading={loading}
+                //   addToPlayListHandler={addToPlayListHandler}
+                />
+              ))
+            ) : (
+              <Heading mt={'20'} minH={'60vh'}>
+                Course Not Found
+              </Heading>
+            )}
+          </Grid>
+        </Container>
+      </>
+    );
+  };
+  
+  export default Course;
+  

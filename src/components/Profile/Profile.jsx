@@ -1,5 +1,18 @@
-import { Avatar, Button, Container, FormControl, HStack, Heading, Image, Input, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import {
+  Avatar,
+  Button,
+  Container,
+  FormControl,
+  HStack,
+  Heading,
+  Image,
+  Input,
+  Stack,
+  Text,
+  VStack,
+  useDisclosure
+} from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import { AiFillDelete } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import {
@@ -11,25 +24,34 @@ import {
   ModalBody,
 
 } from '@chakra-ui/react'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { LoadUser, UpdateProfilePhoto } from '../../redux/actions/UserAction'
+import { CancelSubscription } from '../../redux/actions/SubscriptionAction'
+import { toast } from 'react-hot-toast'
 const Profile = () => {
+  const dispatch = useDispatch();
+  const {  user } = useSelector(state => state.user)
 
-  const User = {
-    ProfilePhoto: "https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg",
-    Name: "anil",
-    Email: "anil@anil.com",
-    CeatedAt: "22/02/2019",
-    role: "user",
-    subscription: {
-      status: "active",
-
-    },
-    playlist: [{
-      course: "asdkfa",
-      poster: "https://q5n8c8q9.rocketcdn.me/wp-content/uploads/2019/07/YouTube-Banner-Size-and-Dimensions-Guide.png.webp"
-    }]
-  }
+  const { message, error, loading } = useSelector(state => state.payment)
+  useEffect(() => {
+    if (error) {
+      toast.error(error)
+      dispatch({ type: 'cleareError' })
+    }
+    if (message) {
+      toast.success(message)
+      dispatch({ type: 'clearMessagge' })
+    }
+    
+  },
+    [dispatch, error, message]);
   const { isOpen, onOpen, onClose } = useDisclosure()
+  // if (!user.avatar ) {
+  //   return <h1>h</h1>; 
+  // }
+  if (!user.avatar) {
+    return (<Avatar />)
+  };
   const RemovePlaylistHandler = () => {
     console.log("re")
   }
@@ -37,41 +59,41 @@ const Profile = () => {
     e.preventDefault()
     console.log(image)
   }
+  const CencerHandler = () => {
+    dispatch(CancelSubscription())
+  }
+
   return (
     <>
       <Container minH={'95vh'} maxW={'container.md'}>
         <Heading textAlign={'center'} m={'4'}>Profile</Heading>
-
         <Stack p={'8'} direction={['column', 'row']} spacing={["30", "50"]} alignItems={['center', 'flex-start']} justifyContent={'center'}>
           <VStack ml={['0', '90']}>
-            <Avatar boxSize={'40'}></Avatar>
+            <Avatar src={user.avatar.url} boxSize={'40'}></Avatar>
             <Link><Button colorScheme='linkedin' onClick={onOpen} variant={'ghost'}> Change picture</Button></Link>
           </VStack>
           <VStack justifyContent={['flex-start', '']} alignItems={['flex-start', 'flex-start']}>
             <HStack>
-              <Text >Name-</Text>
-              <Text fontWeight={'bold'}>{` ${User.Name}`}</Text>
+              <Text >name-</Text>
+              <Text fontWeight={'bold'}>{` ${user.name}`}</Text>
             </HStack>
             <HStack>
-              <Text >Email-</Text>
-              <Text fontWeight={'bold'}>{` ${User.Email}`}</Text>
+              <Text >email-</Text>
+              <Text fontWeight={'bold'}>{` ${user.email}`}</Text>
             </HStack>
             <HStack>
               <Text >Created AT-</Text>
-              <Text fontWeight={'bold'}> {` ${User.CeatedAt.toString().slice('')}`}</Text>
+              <Text fontWeight={'bold'}> {` ${user.CreateAT.toString().slice(0, 10)}`}</Text>
             </HStack>
-
-
-
             {
-              User.role !== "admin" && (
+              user.role !== "admin" && (
                 <HStack>
                   <Text >
                     Subscription
                   </Text>
                   {
-                    User.subscription.status === "active" ? (
-                      <Button variant={'ghost'} colorScheme='linkedin'>Cancel Subscription</Button>
+                    user.subscription && user.subscription.status === "active" ? (
+                      <Button variant={'ghost'} isLoading={loading} onClick={CencerHandler} colorScheme='linkedin'>Cancel Subscription</Button>
                     ) : (
                       <Link to={"/subscribe"}>
                         <Button variant={'ghost'} colorScheme='linkedin'>Subscribe</Button>
@@ -82,7 +104,6 @@ const Profile = () => {
               )
             }
           </VStack>
-
         </Stack>
         <Stack alignItems={'center'} justifyContent={'center'} direction={["column", "row"]} >
 
@@ -91,47 +112,47 @@ const Profile = () => {
             <Link to={"/changepassword"}><Button bg={'linkedin.100'} variant={'ghost'}>Change Password</Button></Link>
           </HStack>
         </Stack>
-
         <Heading p={'5'} size={'md'}>Playlists-</Heading>
-
         {
-          User.playlist.length > 0 && (
+          user.playlist.length > 0 && (
             <Stack justifyContent={'center'} alignItems={'center'} flexWrap={'wrap'} direction={["column", "row"]} >
 
               {
-                User.playlist.map((e) => (
+                user.playlist.map((e) => (
                   <VStack w={'48'} m='2' key={e.course}>
                     <Link to={`/course/${e.course}`}><Image boxSize={'full'} objectFit={'contain'} src={e.poster}></Image></Link>
                     <HStack m={'1'}><Link to={`/course/${e.course}`}><Button variant={'outline'} colorScheme='linkedin'>Watch Now</Button></Link>
                       <Button onClick={RemovePlaylistHandler} color={'red'} variant={'ghost'}><AiFillDelete /></Button>
                     </HStack>
                   </VStack>
-
                 ))
               }
             </Stack>
           )
         }
+        {
+          user.playlist.length > 0 ? ("") : (<><Link to={'/course'}><Button variant={'outline'} mb={'2'} color={'linkedin.400'}>Add playlist</Button></Link></>)
+        }
       </Container>
       <InitialFocus changeImgeSumbit={changeImgeSumbit} isOpen={isOpen} onClose={onClose} />
-
     </>
   )
 }
-
 export default Profile
 
-function InitialFocus({ isOpen, onClose, changeImgeSumbit }) {
+function InitialFocus({ isOpen, onClose, }) {
   const [PreAvtar, setPreAvtar] = useState("")
+  const [PreAvtarPP, setPreAvtarPP] = useState("")
   const AvtarHandler = (e) => {
     const file = e.target.files[0]
     const reader = new FileReader()
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setPreAvtar(reader.result);
+      setPreAvtarPP(reader.result);
+      setPreAvtar(file)
     }
   }
-
 
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
@@ -139,12 +160,17 @@ function InitialFocus({ isOpen, onClose, changeImgeSumbit }) {
     onClose();
     setPreAvtar('')
   }
-
-
+  const dispatch = useDispatch();
+  const sumbithandler = (e) => {
+    e.preventDefault();
+    const myForm = new FormData();
+    myForm.append('file', PreAvtar);
+    dispatch(UpdateProfilePhoto(myForm));
+    // console.log(myForm);
+    dispatch(LoadUser())
+  };
   return (
     <>
-
-
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
@@ -153,25 +179,16 @@ function InitialFocus({ isOpen, onClose, changeImgeSumbit }) {
       >
         <ModalOverlay backdropFilter={'blur(5px)'} />
         <ModalContent >
-          <form onSubmit={e => changeImgeSumbit(e, Image)}>
-
-
+          <form onSubmit={sumbithandler}>
             <ModalHeader>Choose a Image</ModalHeader>
-
             <ModalBody pb={6}>
               <HStack mb={'4'} justifyContent={'center'}>
-                <Avatar src={PreAvtar} boxSize={'32'}></Avatar>
+                <Avatar src={PreAvtarPP} boxSize={'32'}></Avatar>
               </HStack>
-
               <FormControl>
-
-                <Input className='inputAvtar' accept='image/' onChange={AvtarHandler} type='file' required />
-               
+                <Input classname='inputAvtar' accept='image/*' onChange={AvtarHandler} type='file' required />
               </FormControl>
-
-
             </ModalBody>
-
             <ModalFooter>
               <Button type='submit' colorScheme='blue' mr={3}>
                 Save Changes

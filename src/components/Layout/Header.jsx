@@ -28,12 +28,16 @@ import {
     DrawerCloseButton,
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
-
-
-const Header = ({isAouthrizedAdmin=false,user}) => {
+import { useDispatch } from 'react-redux'
+import { LogoutUser } from '../../redux/actions/UserAction'
+const Header = ({ isAuthenticated , user }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
-   
+    const dispatch = useDispatch()
+    const UserLogoutHandler = () => {
+        // console.log("logout")
+        dispatch(LogoutUser())
+    }
     return (
         <>
             <ColorModeSwitcher />
@@ -80,12 +84,12 @@ const Header = ({isAouthrizedAdmin=false,user}) => {
                                 </Button>
                             </Link>
                             <HStack justifyContent={'space-between'} left={'19'} bottom={'2'} position={'absolute'} >
-                                {isAouthrizedAdmin ? (<>
+                                {isAuthenticated ? (<>
                                     <Link to={'/profile'}>
                                         <Button marginLeft={'4rem'} variant='solid'><CgProfile /></Button>
                                     </Link>
-                                    <Link to={'/logout'}>
-                                        <Button marginLeft={'1rem'} variant='ghost'><IoIosLogOut /></Button>
+                                    <Link>
+                                        <Button onClick={UserLogoutHandler} marginLeft={'1rem'} variant='ghost'><IoIosLogOut /></Button>
                                     </Link>
 
                                     <br />

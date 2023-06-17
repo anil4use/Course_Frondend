@@ -1,56 +1,54 @@
 import { Box, Button, Container, FormControl, FormLabel, Heading, Input, Text, Textarea, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { toast } from 'react-hot-toast'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { Link } from 'react-router-dom'
+import { ContactWithUs } from '../../redux/actions/UserAction'
 
 const Contact = () => {
-    const [Email, SetEamil] = useState("")
-    const [Name, SetName] = useState("")
-    const [Title,SetTitle]=useState('')
-    const [Desc,SetDesc]=useState('')
+    const [email, SetEamil] = useState("")
+    const [name, Setname] = useState("")
+    const [desc, Setdesc] = useState('')
     const isError = Input === ''
+    const dispatch = useDispatch()
+    const { message, error, loading } = useSelector(state => state.user)
 
-    const LoginHandler = () => {
-        console.log("login")
+    useEffect(() => {
+        if (error) {
+            toast.error(error)
+            dispatch({ type: 'cleareError' })
+        }
+        if (message) {
+            toast.success(message)
+            dispatch({ type: 'clearMessagge' })
+        }
+    },
+        [dispatch, error, message]);
+    const SumbitHandler = (e) => {
+        e.preventDefault();
+        dispatch(ContactWithUs(name, email, desc));
     }
-
     return (
         <Container h={'95vh'} maxW={'container.lg'} paddingY={'8'}>
             <Heading textAlign={'center'}>Contact Us</Heading>
-
             <VStack justifyContent={'center'} spacing={'16'} h={'400'}>
                 <Box >
-                    <FormControl w={'-moz-min-content'} isInvalid={isError}>
-                        <FormLabel>Name</FormLabel>
-                        <Input required placeholder='Jonh Dev' type='Name' value={Name} onChange={e => SetName(e.target.value)} />
-
-
-                        <FormLabel>Email</FormLabel>
-                       
-                       
-                       <Input required placeholder='exampl@gamil.com' type='email' value={Email} onChange={e => SetEamil(e.target.value)} />
-             
-                       <FormLabel>Title</FormLabel>
-                       
-                       
-                       <Input required placeholder='Title' type='text' value={Title} onChange={e => SetTitle(e.target.value)} />
-                       <FormLabel>Message</FormLabel>
-                       
-                       
-                       {/* <Input w={'sm'}  h={'20'} required placeholder='Title' type='' value={Title} onChange={e => SetTitle(e.target.value)} /> */}
-             
-                       <Textarea value={Desc} onChange={e=>SetDesc(e.target.value)} placeholder='Enter text here...' name="comment"  form="usrform"></Textarea>
-                        <Link to={"/login"}>
-                            <Button mt={'3'} colorScheme='linkedin' onClick={LoginHandler}> Contact Us</Button>
-                        </Link>
-                        <Text> Request a new course <Link to={"/requestcourse"}>   <Button variant={'link'} colorScheme='linkedin' onClick={LoginHandler}>click</Button></Link>here</Text>
-                    </FormControl>
+                    <form onSubmit={SumbitHandler}>
+                        <FormControl w={'sm'} isInvalid={isError}>
+                            <FormLabel>name</FormLabel>
+                            <Input required placeholder='Jonh Dev' type='name' value={name} onChange={e => Setname(e.target.value)} />
+                            <FormLabel>email</FormLabel>
+                            <Input required placeholder='exampl@gamil.com' type='email' value={email} onChange={e => SetEamil(e.target.value)} />
+                            <Textarea value={desc} onChange={e => Setdesc(e.target.value)} placeholder='Enter text here...' name="comment" form="usrform"></Textarea>
+                            <Button mt={'3'} isLoading={loading} colorScheme='linkedin' type='submit'> Contact Us</Button>
+                            <Text> Request a new course <Link to={"/requestcourse"}>   <Button variant={'link'} colorScheme='linkedin'>click</Button></Link>here</Text>
+                        </FormControl>
+                    </form>
                 </Box>
             </VStack>
-
-
         </Container>
     )
 }
-
 export default Contact

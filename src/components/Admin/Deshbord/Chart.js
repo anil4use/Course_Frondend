@@ -26,7 +26,7 @@ ChartJs.register(
     Legend
 );
 
-export const LineChart = () => {
+export const LineChart = ({dataArray=[]}) => {
     const labels = ['January',
     'February',
     'March',
@@ -55,7 +55,7 @@ export const LineChart = () => {
         datasets: [
             {
                 label: "Views",
-                data: [1, 2, 3, 4, 2, 34, 33, 2],
+                data:dataArray,
                 borderColor: "red",
                 backgroundColor: "pink"
             }
@@ -66,7 +66,7 @@ export const LineChart = () => {
         <Line option={Option} data={data} />
     )
 }
-export const LineChartUsers = () => {
+export const LineChartUsers = ({sub=[]}) => {
     const labels =['January',
     'February',
     'March',
@@ -95,7 +95,7 @@ export const LineChartUsers = () => {
         datasets: [
             {
                 label: "Users",
-                data: [1, 2, 34, 4, 2, 34, 33, 2],
+                data:sub,
                 borderColor: 'rgb(0, 2, 9)',
                 backgroundColor: 'rgb(99,4,34)',
                 tension: 0.1,
@@ -111,14 +111,14 @@ export const LineChartUsers = () => {
     )
 }
 
-export const DoughnutChart = () => {
+export const DoughnutChart = ({users=[]}) => {
     const labels = ["Subscribed", "Not Subscribed"];
     const data = {
         labels,
         datasets: [
             {
                 label: "Subscribe",
-                data: [1, 6],
+                data:users,
                 borderColor: ["rgb(67,23,232)", 'rgb(214,34,128)'],
                 backgroundColor: ["rgba(67,23,232,0.3)", 'rgba(214,34,128,0.3)'],
                 borderWidth: 2

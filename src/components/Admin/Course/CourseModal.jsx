@@ -1,90 +1,151 @@
-import { Box, Button, Grid, Heading, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, VStack } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import {
+    Box,
+    Button,
+    Grid,
+    HStack,
+    Heading,
+    Input,
+    Table,
+    TableCaption,
+    TableContainer,
+    Tbody,
+    Td,
+    Text,
+    Th,
+    Thead,
+    Tr,
+    VStack
+} from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import { toast } from 'react-hot-toast';
 import { RiDeleteBinFill } from 'react-icons/ri'
-
-const CourseModal = ({ isOpen,
-    onClose,
-    id,
-    deleteLectureHandler,
-    CourseTitle,
-    AddLectureHandler,
-    lecture = [23,2,3,4,3,44,4,5] }) => {
-    // const CourseTitle = "react"
-
+import { useDispatch, useSelector } from 'react-redux';
+import { DeleteLectureAdmin, getCourseLacture } from '../../../redux/actions/CourseAction';
+import { useParams } from 'react-router-dom';
+import { AddLectureAdmin } from '../../../redux/actions/AdminAction';
+const CourseModal = () => {
+    const { loading, error, message } = useSelector(state => state.admin);
+    const { loading: loadingg, error: errore, lectures, message: messagee } = useSelector(state => state.course);
+    const param = useParams();
+    const dispatch = useDispatch();
+    const CourseID = param.id
     const [title, Settitle] = useState('')
     const [desc, Setdesc] = useState('')
     const [video, Setvideo] = useState('')
-    // const [prevideo, Setprevideo] = useState('')
-
     const AvtarHandler = (e) => {
         const file = e.target.files[0]
         const reader = new FileReader()
         reader.readAsDataURL(file);
         reader.onloadend = () => {
             Setvideo(reader.result);
+            Setvideo(file);
         }
     }
-const closehander=()=>{
-    Settitle("")
-    Setdesc("")
-    Setvideo("")
-    onClose()
-}
-    return (
-        <Modal scrollBehavior='outside' size={'full'} isOpen={isOpen} onClose={closehander}>
-            <ModalOverlay />
-            <ModalContent>
-                <ModalHeader>{CourseTitle}</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody p={'16'}>
-                    <Grid templateColumns={['1fr', '3fr 1fr']}>
-                        <Box p={['0', '16']}>
-                            <Box my={'5'}>
-                                <Heading>{CourseTitle}</Heading>
-                                <Heading size={'sm'} opacity={'0.4'}>{`#${id}`}</Heading>
-                            </Box>
-                            <Heading size={'lg'}>Lectures</Heading>
-                          {lecture.map((e,i)=>(
-                              <VideoCard
-                              key={i}
-                              title="REact into"
-                              desc='this a ract coures'
-                              num={i+1}
-                              lectureId={"sdfkjsd"}
-                              CourseId={id}
-                              deleteLectureHandler={deleteLectureHandler} />
-                          ))}
-                        </Box>
-                        <Box>
-                            <form onSubmit={e => AddLectureHandler(e, id, title, desc, video)} action="">
-                                <VStack spacing={'4'}>
-                                    <Heading textTransform={'uppercase'} size={'md'}>Add lecture</Heading>
-                                    <Input required placeholder='Title' type='Name' value={title} onChange={e => Settitle(e.target.value)} />
-                                    <Input required placeholder='Description' type='Name' value={desc} onChange={e => Setdesc(e.target.value)} />
-                                    <Input isRequired className='inputAvtar' accept='video/mp4' onChange={AvtarHandler} type='file' required />
-                                    <Button type='submit' variant={'outline'} colorScheme='linkedin' w={'full'}>Upload</Button>
-                                </VStack>
-                            </form>
-                        </Box>
-                    </Grid>
-                    <ModalFooter>
-                    <Button colorScheme='linkedin' onClick={closehander}>Close</Button>
-                </ModalFooter>
-                </ModalBody>
-             
-            </ModalContent>
-        </Modal>
+    useEffect(() => {
+    }, [dispatch, param.id]);
+    const AddLectureHandler = (e, CourseID) => {
+        console.log(CourseID)
+        e.preventDefault()
+        const myForm = new FormData();
+        myForm.append('title', title);
+        myForm.append('descripaton', desc);
+        myForm.append('file', video);
+        dispatch(AddLectureAdmin(CourseID, myForm));
+    }
+    const deleteLectureHandler = (CourseID, LecureID) => {
+        dispatch(DeleteLectureAdmin(CourseID, LecureID))
+        dispatch(getCourseLacture(param.id));
+    }
+    useEffect(() => {
+        if (error) {
+            toast.error(error)
+            dispatch({ type: 'cleareError' })
+        }
+        if (message) {
+            toast.success(message)
+            dispatch({ type: 'clearMessagge' })
+        }
+        dispatch(getCourseLacture(param.id));
 
+    }, [dispatch, error, message, param]);
+    useEffect(() => {
+        if (errore) {
+            toast.error(errore)
+            dispatch({ type: 'cleareError' })
+        }
+        if (messagee) {
+            toast.success(messagee)
+            dispatch({ type: 'clearMessagge' })
+        }
+        dispatch(getCourseLacture(param.id));
+
+    }, [dispatch, errore, messagee, param]);
+    return (
+        <>
+            <Grid minH={'100vh'} maxW={'100%'} templateColumns={['1fr', '5fr 1fr']}>
+                <Box minW={'60'} p={['0', '8']} overflowX={'auto'}>
+                    <Heading textAlign={'center'}>All Lectures </Heading>
+                    <Text m={'4'} textAlign={'center'}>Course ID --- #{CourseID} </Text>
+                    <TableContainer w={['100vw', 'full']}>
+                        <Table size={'lg'} variant={'simple'}>
+                            <TableCaption>All Availabele users in Database</TableCaption>
+                            <Thead>
+                                <Tr>
+                                    <Th>NO.</Th>
+                                    <Th>LecureID</Th>
+                                    <Th>Title</Th>
+                                    <Th>DESS</Th>
+                                    <Th isNumeric>Action</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                {lectures.length > 0 ? (
+                                    lectures.map((e, i) => (
+                                        <VideoCard
+                                            key={i}
+                                            i={i}
+                                            loading={loadingg}
+                                            CourseID={CourseID}
+                                            e={e}
+                                            deleteLectureHandler={deleteLectureHandler}
+                                        />
+                                    ))
+                                ) : (
+                                    <Text>NO lectures found</Text>
+                                )}
+
+                            </Tbody>
+                        </Table>
+                    </TableContainer>
+                </Box>
+                <Box mt={'4'} p={["10", '50']}>
+                    <form onSubmit={e => AddLectureHandler(e, CourseID)} action="">
+                        <VStack w={'80'} spacing={'4'}>
+                            <Heading textTransform={'uppercase'} size={'md'}>Add lecture</Heading>
+                            <Input required placeholder='Title' type='Name' value={title} onChange={e => Settitle(e.target.value)} />
+                            <Input required placeholder='Description' type='Name' value={desc} onChange={e => Setdesc(e.target.value)} />
+                            <Input isRequired className='inputAvtar' accept='video/mp4' onChange={AvtarHandler} type='file' required />
+                            <Button isLoading={loading} type='submit' variant={'outline'} colorScheme='linkedin' w={'full'}>Upload</Button>
+                        </VStack>
+                    </form>
+                </Box>
+            </Grid>
+        </>
     )
 }
-
 export default CourseModal
-function VideoCard({ title, desc, num, lectureId, CourseId, deleteLectureHandler }) {
-    return <Stack p={['4', '8']} justifyContent={['flex-start', 'space-between']} direction={['column', 'row']} my={'8'} boxShadow={'0 0 10px rgba(107,10,8,0.6)'}>
-        <Box>
-            <Heading>{`#${num} ${title}`}</Heading>
-            <Text>{desc}</Text>
-        </Box>
-        <Button color={'linkedin.600'} onClick={() => deleteLectureHandler(lectureId, CourseId)}><RiDeleteBinFill /></Button>
-    </Stack>
+function VideoCard({ e, CourseID, i, deleteLectureHandler, loadingg }) {
+    return (
+        <Tr>
+            <Td>{i + 1}</Td>
+            <Td>#{e._id}</Td>
+            <Td>{e.title}</Td>
+            <Td>{e.descripaton}</Td>
+            <Td isNumeric>
+                <HStack justifyContent={'flex-end'}>
+                    <Button variant={'outline'} isLoading={loadingg} onClick={() => deleteLectureHandler(CourseID, e._id)} color={'linkedin.500'}>Delete Lecture <RiDeleteBinFill /></Button>
+                </HStack>
+            </Td>
+        </Tr>
+    )
 }
