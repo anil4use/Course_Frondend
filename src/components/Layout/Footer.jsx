@@ -56,7 +56,7 @@ export default function Footer() {
                     </SocialButton>
                 </Stack>
                 <Text textAlign={'center'} fontWeight={'semibold'} fontSize={'md'}>Design and Develop by --ANIL</Text>
-                <Text textAlign={'center'} fontWeight={'bold'} fontSize={'md'}>© 2022 Chakra Templates. All rights reserved</Text>
+                <Text textAlign={'center'} fontWeight={'bold'} fontSize={'md'}>© 2023 Free Course RR . All rights reserved</Text>
 
             </Container>
         </Box>

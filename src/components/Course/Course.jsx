@@ -1,5 +1,5 @@
 import {
-  Box,
+  
   Button,
   Card,
   CardBody,
@@ -84,9 +84,9 @@ const Course = () => {
     'data Scintece',
     'C & C++ full course',
     'Python basic',
-    'java tetouril',
-    'web dovlopment',
-    'Machine Lernig',
+    'Java Advace',
+    'Web Development',
+    'Machine Learning',
   ];
 
   // const addToPlayListHandler = CourseID => {

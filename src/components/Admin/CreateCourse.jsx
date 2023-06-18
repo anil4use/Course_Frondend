@@ -11,7 +11,12 @@ const CreateCourse = () => {
   const [Poster, setPoster] = useState("")
   const [category, Setcategory] = useState('')
   const Categories = [
-    "web dovlopment", "data Scintece", "c &c++ full course", "python basic", "java tetouril", "web dovlopment", "python adwand"
+    'data Scintece',
+    'C & C++ full course',
+    'Python basic',
+    'Java Advace',
+    'Web Development',
+    'Machine Learning',
   ]
   const AvtarHandler = (e) => {
     const file = e.target.files[0]
@@ -23,7 +28,7 @@ const CreateCourse = () => {
     }
   }
   const dispatch = useDispatch();
-  const { loading,  message, error } = useSelector(state => state.admin)
+  const { loading, message, error } = useSelector(state => state.admin)
   useEffect(() => {
     if (error) {
       toast.error(error)
@@ -36,15 +41,15 @@ const CreateCourse = () => {
   },
     [dispatch, error, message]);
   const sumbitHander = (e) => {
-      e.preventDefault();
-      const myForm = new FormData();
-      myForm.append('title', title);
-      myForm.append('descripaton', descripaton);
-      myForm.append('createBY', createBY);
-      myForm.append('category', category);
-      myForm.append('file', Poster);
-      dispatch(CreateCourses(myForm));
-      console.log(myForm);
+    e.preventDefault();
+    const myForm = new FormData();
+    myForm.append('title', title);
+    myForm.append('descripaton', descripaton);
+    myForm.append('createBY', createBY);
+    myForm.append('category', category);
+    myForm.append('file', Poster);
+    dispatch(CreateCourses(myForm));
+    console.log(myForm);
   };
   return (
     <>
