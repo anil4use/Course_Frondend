@@ -20,13 +20,14 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCourse } from '../../redux/actions/CourseAction';
 import { toast } from 'react-hot-toast';
+import "../Home/home.css"
 
 const Course = () => {
   const { error, message, courses, loading } = useSelector(state => state.course);
 
   const Courese = ({ title, loading, CreatedBY, desc, views, lectures, id, imgSrc }) => {
     return (
-      <GridItem  m={'auto'}  mt={'4'}>
+      <GridItem className='Course' m={'auto'}  mt={'4'}>
         <Card maxW='72'>
           <CardBody>
             <Image
@@ -36,7 +37,7 @@ const Course = () => {
             />
             <Stack mt='6' spacing='3'>
               <Heading size='md'>{title}</Heading>
-              <Text>{desc}</Text>
+              <Text >{desc}</Text>
               <Text>Creater Name - {CreatedBY}</Text>
               <HStack>
                 <Text>Total Lectures --</Text>
@@ -81,10 +82,10 @@ const Course = () => {
 
   const categories = [
     // 'web dovlopment',
-    'data Scintece',
+    'Data Structure',
     'C & C++ full course',
     'Python basic',
-    'Java Advace',
+    'Java Advance',
     'Web Development',
     'Machine Learning',
   ];

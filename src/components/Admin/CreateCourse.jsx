@@ -9,12 +9,13 @@ const CreateCourse = () => {
   const [title, Settitle] = useState('');
   const [descripaton, Setdescripaton] = useState('');
   const [Poster, setPoster] = useState("")
+  const [PrePoster, setPrePoster] = useState("")
   const [category, Setcategory] = useState('')
   const Categories = [
-    'data Scintece',
+    'Data Structure',
     'C & C++ full course',
     'Python basic',
-    'Java Advace',
+    'Java Advance',
     'Web Development',
     'Machine Learning',
   ]
@@ -24,6 +25,7 @@ const CreateCourse = () => {
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setPoster(reader.result);
+      setPrePoster(reader.result);
       setPoster(file)
     }
   }
@@ -73,7 +75,7 @@ const CreateCourse = () => {
                 </VStack>
               </FormControl>
               {Poster && (
-                <Image objectFit={'contain'} boxSize={'64'} src={Poster}></Image>
+                <Image objectFit={'contain'} boxSize={'64'} src={PrePoster}></Image>
               )}
             </VStack>
           </form>
