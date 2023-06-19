@@ -61,8 +61,8 @@ const Register = () => {
                             <Input required placeholder='Password' type='password' value={Password} onChange={e => SetPassword(e.target.value)} />
                             <FormLabel>Choose a Avtar</FormLabel>
                             <Input className='inputAvtar' accept='image/*' id='avtar' onChange={AvtarHandler} type='file' required />
-                            <Button mt={'3'} color={'linkedin.300'} variant={'solid'} type='submit' >Sign UP</Button>
-                            <Text> You have a accout <Link to={"/login"}>   <Button color={'linkedin.300'} variant={'link'} onClick={LoginHandler}>click</Button></Link>here</Text>
+                            <Button mt={''} color={'linkedin.300'} variant={'solid'} type='submit' >Sign UP</Button>
+                            <Text mt={'6'}> You have a accout <Link to={"/login"}>   <Button color={'linkedin.300'} variant={'link'} onClick={LoginHandler}>click</Button></Link>here</Text>
                        </Stack>
                         </FormControl>
                     </form>

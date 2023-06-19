@@ -56,7 +56,7 @@ const RequestCourse = () => {
                             <FormLabel>Coures details</FormLabel>
                             <Textarea value={course} onChange={e => Setcourse(e.target.value)} placeholder='Enter text here...' name="comment" form="usrform"></Textarea>
                             <Button mt={'3'} isLoading={loading} color={'linkedin.300'} variant={'solid'} type='submit'> Request</Button>
-                            <Text> Browser Courses <Link to={"/course"}>   <Button color={'linkedin.300'} variant={'link'} onClick={LoginHandler}>click</Button></Link>here</Text>
+                            <Text> Browser Courses <Link to={"/course"}>   <Button mt={'2'} color={'linkedin.300'} variant={'link'} onClick={LoginHandler}>click</Button></Link>here</Text>
                        </Stack>
                         </FormControl>
                     </form>

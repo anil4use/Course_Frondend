@@ -46,7 +46,7 @@ const Contact = () => {
                             <FormLabel>Message</FormLabel>
                             <Textarea value={desc} onChange={e => Setdesc(e.target.value)} placeholder='Enter text here...' name="comment" form="usrform"></Textarea>
                             <Button mt={'3'} isLoading={loading} color={'linkedin.300'} variant={'solid'} type='submit'> Contact Us</Button>
-                            <Text> Request a new course <Link to={"/requestcourse"}>   <Button color={'linkedin.300'} variant={'link'}>click</Button></Link>here</Text>
+                            <Text> Request a new course <Link to={"/requestcourse"}>   <Button mt={'2'} color={'linkedin.300'} variant={'link'}>click</Button></Link>here</Text>
                             </Stack>
 
                         </FormControl>
