@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Container, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Text, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Button, Container, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Stack, Text, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { RegisterUser } from '../../redux/actions/UserAction'
@@ -41,6 +41,8 @@ const Register = () => {
                 <Box >
                     <form onSubmit={registerHandler}>
                         <FormControl w={'-moz-min-content'} isInvalid={isError}>
+                        <Stack spacing={'2'} justifyContent={'center '}  >
+
                             <VStack>
                                 <Avatar size={'lg'} src={AvatarPP} />
                             </VStack>
@@ -61,6 +63,7 @@ const Register = () => {
                             <Input className='inputAvtar' accept='image/*' id='avtar' onChange={AvtarHandler} type='file' required />
                             <Button mt={'3'} color={'linkedin.300'} variant={'solid'} type='submit' >Sign UP</Button>
                             <Text> You have a accout <Link to={"/login"}>   <Button color={'linkedin.300'} variant={'link'} onClick={LoginHandler}>click</Button></Link>here</Text>
+                       </Stack>
                         </FormControl>
                     </form>
                 </Box>

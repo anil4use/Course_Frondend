@@ -1,4 +1,4 @@
-import { Box, Button, Container, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Text, } from '@chakra-ui/react'
+import { Box, Button, Container, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, Stack, Text, } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -20,9 +20,11 @@ const Login = () => {
         <Container mt={'50'} h={'95vh'} paddingY={'16'}>
             <Heading textAlign={'center'}>Free Course RR LOGIN</Heading>
 
-                <Box  p={4} >
-                    <form onSubmit={SumbitHandler} >
-                        <FormControl  isInvalid={isError}>
+            <Box p={4} >
+                <form onSubmit={SumbitHandler} >
+                    <FormControl isInvalid={isError}>
+                        <Stack spacing={'4'} justifyContent={'center '}  >
+
                             <FormLabel>Email</FormLabel>
                             <Input required placeholder='exampl@gamil.com' type='email' value={Email} onChange={e => SetEamil(e.target.value)} />
                             {!isError ? (
@@ -42,10 +44,10 @@ const Login = () => {
                             <Button mt={'3'} color={'linkedin.300'} variant={'solid'} type='submit'>login Now</Button>
 
                             <Text m={'4'}> You don't have a accout <Link to={"/register"}>   <Button color={'linkedin.300'} variant={'link'} onClick={forgetHandler}>click</Button></Link>here</Text>
-
-                        </FormControl>
-                    </form>
-                </Box>
+                        </Stack>
+                    </FormControl>
+                </form>
+            </Box>
 
 
         </Container>
