@@ -6,7 +6,7 @@ import {
     Text,
     VisuallyHidden,
 } from '@chakra-ui/react';
-import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaGithub, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from 'react-icons/fa';
 //   import { ReactNode } from 'react';
 
 const SocialButton = ({ children, label, href }) => (
@@ -45,13 +45,17 @@ export default function Footer() {
                 align={{ base: 'center', md: 'center' }}
             >
                 <Stack direction={'row'} spacing={6}>
-                    <SocialButton label={'Twitter'} href={'#'}>
+                    <SocialButton label={'Twitter'} href={'https://twitter.com/AnilAnuragee'}>
                         <FaTwitter />
                     </SocialButton>
-                    <SocialButton label={'YouTube'} href={'#'}>
-                        <FaYoutube />
+                    <SocialButton label={'linkedin'} href={'https://www.linkedin.com/in/anil-anuragee-3475b81b7/'}>
+                        <FaLinkedinIn />
                     </SocialButton>
-                    <SocialButton label={'Instagram'} href={'#'}>
+                    <SocialButton label={'githut'}  href={'https://github.com/anil4use'}>
+                        <FaGithub />
+                    </SocialButton>
+                 
+                    <SocialButton label={'Instagram'} href={'https://www.instagram.com/aniltheboss/'}>
                         <FaInstagram />
                     </SocialButton>
                 </Stack>
