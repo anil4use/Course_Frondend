@@ -140,7 +140,7 @@ function VideoCard({ e, CourseID, i, deleteLectureHandler, loadingg }) {
             <Td>{i + 1}</Td>
             <Td>#{e._id}</Td>
             <Td>{e.title}</Td>
-            <Td>{e.descripaton}</Td>
+            <Td>{e.descripaton.slice(0,70)}....</Td>
             <Td isNumeric>
                 <HStack justifyContent={'flex-end'}>
                     <Button variant={'outline'} isLoading={loadingg} onClick={() => deleteLectureHandler(CourseID, e._id)} color={'linkedin.500'}>Delete Lecture <RiDeleteBinFill /></Button>

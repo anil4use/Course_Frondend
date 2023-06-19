@@ -6,6 +6,7 @@ import {
     FormLabel,
     Heading,
     Input,
+    Stack,
     Text,
     Textarea,
 } from '@chakra-ui/react'
@@ -46,6 +47,8 @@ const RequestCourse = () => {
                 <Box >
                     <form onSubmit={SumbitHandler}>
                         <FormControl w={'-moz-initial'} isInvalid={isError}>
+                        <Stack spacing={'4'} justifyContent={'center '}  >
+
                             <FormLabel>Name</FormLabel>
                             <Input required placeholder='Jonh Dev' type='name' value={name} onChange={e => Setname(e.target.value)} />
                             <FormLabel>Email</FormLabel>
@@ -54,6 +57,7 @@ const RequestCourse = () => {
                             <Textarea value={course} onChange={e => Setcourse(e.target.value)} placeholder='Enter text here...' name="comment" form="usrform"></Textarea>
                             <Button mt={'3'} isLoading={loading} color={'linkedin.300'} variant={'solid'} type='submit'> Request</Button>
                             <Text> Browser Courses <Link to={"/course"}>   <Button color={'linkedin.300'} variant={'link'} onClick={LoginHandler}>click</Button></Link>here</Text>
+                       </Stack>
                         </FormControl>
                     </form>
                 </Box>

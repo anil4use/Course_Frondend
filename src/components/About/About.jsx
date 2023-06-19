@@ -1,43 +1,58 @@
-import { Box, Container, Heading, Text } from '@chakra-ui/react'
-import React from 'react'
+import React from 'react';
+import { Box, Container, Heading, Text } from '@chakra-ui/react';
 
 const About = () => {
   return (
-    <> 
-    <Container maxW={'90%'}>
-        <Heading textAlign={'center'} m={'4'}>About us</Heading>
-
-<Box p={'4'} mt={8}>
-  <Heading as="h2" size="lg" mb={4}>
-    Terms and Conditions
-  </Heading>
-  <Text fontSize="lg">
-    By accessing and using this course, you agree to the following terms and conditions:
-
-    1. Intellectual Property: All course materials, including but not limited to text, images, videos, and downloadable resources, are protected by intellectual property rights and are owned by ALIMITED. You may not distribute, reproduce, or modify any course material without prior written permission.
-
-    2. Course Enrollment: By enrolling in this course, you gain access to the course content for the specified duration. The course content is for personal, non-commercial use only, and you are strictly prohibited from sharing your account credentials or granting access to third parties.
-
-    3. Refunds: We offer a refund policy that allows you to request a refund within  7 days from the date of purchase. Please review our refund policy for detailed information on eligibility and the refund process.
-
-    4. User Responsibilities: You are responsible for providing accurate and up-to-date information during the enrollment process. You are also responsible for maintaining the confidentiality of your account credentials and ensuring their proper use.
-
-    5. Code of Conduct: While participating in this course, you agree to maintain respectful and professional conduct. Any form of harassment, offensive language, or inappropriate behavior towards instructors or fellow learners will not be tolerated and may result in immediate termination of access without a refund.
-
-    6. Technical Requirements: To access the course content, you must have a reliable internet connection and compatible devices. ALIMITED is not responsible for any technical issues or limitations on your end that may affect your learning experience.
-
-    7. Limitation of Liability: ALIMITED shall not be held liable for any direct or indirect damages, including but not limited to financial loss, personal injury, or data loss, arising from the use or inability to use the course materials or any actions taken based on the course content.
-
-    8. Modifications: ALIMITED reserves the right to modify or update these terms and conditions at any time. Any changes will be communicated to you via email or through the course platform.
-
-    By enrolling in this course, you acknowledge that you have read, understood, and agreed to these terms and conditions. If you have any questions or concerns, please contact our support team for assistance.
-  </Text>
-</Box>
+    <>
+      <Container mt={'8'} maxW={'90%'}>
 
 
-    </Container>
+        <Box p={4}>
+          <Heading as="h1" size="xl" mb={4}>
+            Welcome to Free Course RR!
+          </Heading>
+          <Text fontSize="lg" mb={6}>
+            At Free Course RR, we are committed to providing high-quality, accessible education to aspiring software engineers like you. Our mission is to empower individuals with the knowledge and skills they need to succeed in the dynamic world of software development.
+          </Text>
+          <Heading as="h2" size="lg" mb={4}>
+            Who We Are:
+          </Heading>
+          <Text fontSize="md" mb={6}>
+            Free Course RR was founded by Anil, a seasoned software engineer with a deep passion for education and technology. With years of industry experience, Anil recognized the need for a platform that would make education more accessible and affordable for everyone. This led to the creation of Free Course RR, a platform where individuals can enhance their software development skills at their own pace, regardless of their background or location.
+          </Text>
+          <Text fontSize="md" mb={6}>
+            Anil's expertise in the field and his dedication to helping others learn have been instrumental in shaping Free Course RR into a reliable resource for aspiring developers. Through this platform, Anil aims to bridge the gap between theory and practical application, ensuring that learners gain the skills necessary to thrive in the competitive software industry.
+          </Text>
+        </Box>
+        <Box p={4}>
+          <Heading as="h2" size="lg" mb={4}>
+            Why Choose Free Course RR:
+          </Heading>
+          <Text fontSize="md" mb={6}>
+            Quality Education: Our courses are meticulously crafted by industry experts, ensuring that you receive the highest quality content. We strive to provide education that is in line with the latest advancements in software development, preparing you for the real-world challenges you may encounter.
+          </Text>
+          <Text fontSize="md" mb={6}>
+            Flexibility: We understand that everyone has unique schedules and learning preferences. That's why our courses are self-paced, allowing you to study at your convenience and progress at your own speed. You can access our courses anytime, anywhere, making it easier to balance your learning journey with other commitments.
+          </Text>
+          <Text fontSize="md" mb={6}>
+            Interactive Learning: We believe that learning should be engaging and enjoyable. With Free Course RR, you'll find a variety of interactive exercises, quizzes, and coding challenges that will reinforce your understanding and make your learning experience more interactive and fun. Our platform encourages hands-on practice to solidify your knowledge and improve your coding skills.
+          </Text>
+          <Text fontSize="md" mb={6}>
+            Community Support: Learning is not a solitary journey. Our vibrant community of learners and instructors is always ready to assist you. Engage in discussions, seek help, and collaborate with fellow students to enhance your learning experience. Our supportive community fosters collaboration and networking opportunities that can further enrich your career.
+          </Text>
+          <Text fontSize="md" mb={6}>
+            Affordable Pricing: We believe that education should be accessible to everyone. That's why we strive to keep our courses affordable without compromising on quality. We offer both free and premium courses to cater to different budget requirements. Regardless of your financial background, you'll find valuable learning resources at Free Course RR.
+          </Text>
+          <Text fontSize="md" mb={6}>
+            Start Your Journey Today: Whether you're a complete beginner or an experienced developer looking to upgrade your skills, Free Course RR has something for everyone. Join our community today and embark on a learning journey that will empower you to achieve your software engineering goals.
+          </Text>
+          <Text fontSize="md" mb={6}>
+            At Free Course RR, we are dedicated to your success. We are excited to be a part of your educational journey and look forward to helping you unlock your full potential in the world of software development.
+          </Text>
+        </Box>
+      </Container>
     </>
-  )
-}
+  );
+};
 
-export default About
+export default About;

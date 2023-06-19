@@ -37,7 +37,7 @@ const Course = () => {
             />
             <Stack mt='6' spacing='3'>
               <Heading size='md'>{title}</Heading>
-              <Text >{desc}</Text>
+              <Text >{desc.slice(0, 70)}..</Text>
               <Text>Creater Name - {CreatedBY}</Text>
               <HStack>
                 <Text>Total Lectures --</Text>
@@ -98,6 +98,8 @@ const Course = () => {
     dispatch(getAllCourse(category, keyword));
   }, [category, keyword, dispatch]);
 
+
+  
   return (
     <>
       <Container maxh={'95vh'} maxW={'container.lg'} paddingY={'8'}>
@@ -135,6 +137,10 @@ const Course = () => {
             )}
           </Grid>
 
+
+
+   
+  
       </Container>
     </>
   );
