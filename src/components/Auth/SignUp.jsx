@@ -35,12 +35,11 @@ const Register = () => {
         }
     }
     return (
-        <Container h={'95vh'} maxW={'container.lg'} paddingY={'14'}>
+        <Container h={'95vh'}  paddingY={'14'}>
             <Heading textAlign={'center'}>Free Course RR</Heading>
-            <VStack justifyContent={'center'} spacing={'20'} h={'500'}>
                 <Box >
                     <form onSubmit={registerHandler}>
-                        <FormControl w={'-moz-min-content'} isInvalid={isError}>
+                        <FormControl w={''} isInvalid={isError}>
                         <Stack spacing={'2'} justifyContent={'center '}  >
 
                             <VStack>
@@ -67,7 +66,6 @@ const Register = () => {
                         </FormControl>
                     </form>
                 </Box>
-            </VStack>
         </Container>
     )
 }
