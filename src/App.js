@@ -31,9 +31,9 @@ import Course from './components/Course/Course';
 import CourseModal from './components/Admin/Course/CourseModal';
 
 function App() {
-  window.addEventListener("contextmenu",(e)=>{
-    e.preventDefault()
-  })
+  // window.addEventListener("contextmenu",(e)=>{
+  //   e.preventDefault()
+  // })
   const { isAouthenticated, user, message, error, loading } = useSelector(state => state.user)
   const isAuthenticated = isAouthenticated;
   const dispatch = useDispatch()

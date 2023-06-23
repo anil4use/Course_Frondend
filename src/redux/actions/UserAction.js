@@ -179,7 +179,9 @@ export const ResetPassword = (token,password) => async dispatch => {
     } catch (error) {
         dispatch({ type: 'ResetPasswordFail', payload: error.response.data.message })
     }
-}               
+}  
+
+
 ///Delete Course admin
 export const DeleteCourseAdmin = (id) => async dispatch => {
     try {
@@ -192,5 +194,20 @@ export const DeleteCourseAdmin = (id) => async dispatch => {
         dispatch({ type: 'DeleteCourseSuccuss', payload: data.message })
     } catch (error) {
         dispatch({ type: 'DeleteCourseFail', payload: error.response.data.message })
+    }
+}
+
+///  get commtes
+export const AddCommetsAction = (id,courseId,lecturesId) => async dispatch => {
+    try {
+        dispatch({ type: "AddCommetsRequest" });
+        const { data } = await axios.post(`${server}/comments/${id}?courseId=${courseId}&lecturesId=${lecturesId}`, {
+
+            withCredentials: true
+        });
+
+        dispatch({ type: 'AddCommetsSuccuss', payload: data.message })
+    } catch (error) {
+        dispatch({ type: 'AddCommetsFail', payload: error.response.data.message })
     }
 }

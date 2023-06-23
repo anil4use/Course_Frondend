@@ -1,12 +1,13 @@
 
 // export default CoursePage;
-import { Box, Button, Collapse, Grid, Heading, Text, VStack } from '@chakra-ui/react';
+import { Avatar, Box, Button, Collapse, Grid, HStack, Heading, Text, Textarea, VStack } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCourseLacture } from '../../redux/actions/CourseAction';
 import { useParams, Navigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Loader from '../Layout/Loader';
+import { AddCommetsAction } from '../../redux/actions/UserAction';
 
 const CoursePage = ({ user }) => {
   const { lectures, loadingg, message, error } = useSelector(state => state.course);
@@ -15,6 +16,7 @@ const CoursePage = ({ user }) => {
   const dispatch = useDispatch();
   const [show, setShow] = React.useState(false)
   const handleToggle = () => setShow(!show)
+  const [inputValue, setInputValue] = useState('');
 
 
   useEffect(() => {
@@ -40,6 +42,26 @@ const CoursePage = ({ user }) => {
   }
 
 
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const userid= user._id;
+  console.log('user',userid)
+  const lecturesId=lectures[lectureNumber]?._id
+  const courseId=param.id
+  console.log("lec",lecturesId)
+  console.log("cou",courseId)
+
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(AddCommetsAction(userid,courseId,lecturesId))
+    
+
+
+  };
 
   return (
     loadingg ? (
@@ -64,12 +86,40 @@ const CoursePage = ({ user }) => {
                   #{lectureNumber + 1} {lectures[lectureNumber]?.title}
                 </Heading>
                 <Heading fontSize={'24'}>Description ---</Heading>
-                <Collapse startingHeight={20} in={show}>
-                  {lectures[lectureNumber]?.descripaton}
-                </Collapse>
                 <Button size='sm' onClick={handleToggle} mt='1rem'>
                   Show {show ? 'Less' : 'More'}
                 </Button>
+                <Collapse startingHeight={20} in={show}>
+                  {lectures[lectureNumber]?.descripaton}
+                  <Box mt={'4'} borderRadius={'2xl'} border={'2px solid gray'}>
+                  </Box>
+
+                  <Box maxW="full" mx="auto" p={4}>
+                    <form onSubmit={handleSubmit}>
+                      <VStack spacing={4} align="start">
+                        <Textarea
+                          type="text"
+                          value={inputValue}
+                          onChange={handleChange}
+                          placeholder="Enter a value"
+                          required
+                        />
+                        <Button type="submit">Submit</Button>
+                      </VStack>
+                    </form>
+                  </Box>
+
+                  <Box bg={'blackAlpha.100'} borderRadius={'2xl'} h={'20'} m={'4'} alignItems={'center'} textAlign={'center'} gap={'20'} justifyContent={'flex-start'} display={'flex'}>
+                    <HStack ml={'3'}>
+                      <Avatar />
+                      <Text>Ram</Text>
+                    </HStack>
+                    <Text>messag jlksjdflsdkjflsdjkhfgjhggfhgf hhfkhfge</Text>
+                    <Text position={'static'}>{Date().slice(0, 24)}</Text>
+                  </Box>
+
+                </Collapse>
+
               </Box>
 
               <VStack >
@@ -79,12 +129,13 @@ const CoursePage = ({ user }) => {
                     style={{ cursor: 'pointer' }}
                     onClick={() => setLectureNumber(index)}
                   >
-                  <Box borderRadius={'md'} border={'1px solid gray'}
+                    <Box borderRadius={'md'} border={'1px solid gray'}
                     >
                       <video
                         width={320}
                         height={100}
                         src={lecture?.video?.url}
+                      
                         controlsList='nodownload nofullscreen noremoteplayback'
                         disablePictureInPicture
                         disableRemotePlayback
