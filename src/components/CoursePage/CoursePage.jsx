@@ -7,18 +7,17 @@ import { getCourseLacture } from '../../redux/actions/CourseAction';
 import { useParams, Navigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Loader from '../Layout/Loader';
-import { AddCommetsAction } from '../../redux/actions/UserAction';
+import { AddCommetsAction, getCommetsAction } from '../../redux/actions/UserAction';
 
 const CoursePage = ({ user }) => {
   const { lectures, loadingg, message, error } = useSelector(state => state.course);
+  // const { } = useSelector(state => state.user);
   const [lectureNumber, setLectureNumber] = useState(0);
   const param = useParams();
   const dispatch = useDispatch();
   const [show, setShow] = React.useState(false)
+  const [addcommet, setaddcommet] = useState()
   const handleToggle = () => setShow(!show)
-  const [inputValue, setInputValue] = useState('');
-
-
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -33,43 +32,31 @@ const CoursePage = ({ user }) => {
   useEffect(() => {
     dispatch(getCourseLacture(param.id));
   }, [dispatch, param.id]);
-
+  useEffect(() => {
+    dispatch(getCommetsAction())
+  }, [dispatch]);
+  // console.log(comments)
   if (
     user.role !== 'admin' &&
     (user.subscription === undefined || user.subscription.status !== 'active')
   ) {
     return <Navigate to={'/subscribe'} />;
   }
-
-
-  const handleChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
-  const userid= user._id;
-  console.log('user',userid)
-  const lecturesId=lectures[lectureNumber]?._id
-  const courseId=param.id
-  console.log("lec",lecturesId)
-  console.log("cou",courseId)
-
-
-
+  const lectureId = lectures[lectureNumber]?._id
+  // const courseId = param.id
+  const userid = user._id;
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(AddCommetsAction(userid,courseId,lecturesId))
-    
-
-
+    dispatch(AddCommetsAction(addcommet, userid, lectureId, param.id))
   };
 
+  // console.log(courseId,"cour")
   return (
     loadingg ? (
       <Loader />
     ) : (
       <>
         <Heading m={'4'} textAlign={'center'}>Welcome</Heading>
-
         <Grid minH={'90vh'} templateColumns={['1fr', '3fr 1fr']}>
           {lectures && lectures.length > 0 ? (
             <>
@@ -98,9 +85,9 @@ const CoursePage = ({ user }) => {
                     <form onSubmit={handleSubmit}>
                       <VStack spacing={4} align="start">
                         <Textarea
-                          type="text"
-                          value={inputValue}
-                          onChange={handleChange}
+
+                          value={addcommet}
+                          onChange={(e) => setaddcommet(e.target.value)}
                           placeholder="Enter a value"
                           required
                         />
@@ -108,15 +95,26 @@ const CoursePage = ({ user }) => {
                       </VStack>
                     </form>
                   </Box>
+                  {
+                    console.log(lectures[lectureNumber]?.comments.map((e) => (
+                      e.text
+                    )))
+                  }
 
-                  <Box bg={'blackAlpha.100'} borderRadius={'2xl'} h={'20'} m={'4'} alignItems={'center'} textAlign={'center'} gap={'20'} justifyContent={'flex-start'} display={'flex'}>
-                    <HStack ml={'3'}>
-                      <Avatar />
-                      <Text>Ram</Text>
-                    </HStack>
-                    <Text>messag jlksjdflsdkjflsdjkhfgjhggfhgf hhfkhfge</Text>
-                    <Text position={'static'}>{Date().slice(0, 24)}</Text>
-                  </Box>
+                  {
+                    lectures && lectures[lectureNumber]?.comments.map((e) => (
+                      <Box bg={'blackAlpha.100'} borderRadius={'2xl'} h={'20'} m={'4'} alignItems={'center'} textAlign={'center'} gap={'20'} justifyContent={'flex-start'} display={'flex'}>
+                        <HStack ml={'3'}>
+                          <Avatar />
+                          <Text>{e.username}</Text>
+                        </HStack>
+                        <Text> {e.text}</Text>
+                        <Text position={'static'}>{e.timestamp.slice(0,24)}</Text>
+                      </Box>
+                    ))
+
+
+                  }
 
                 </Collapse>
 
@@ -135,13 +133,13 @@ const CoursePage = ({ user }) => {
                         width={320}
                         height={100}
                         src={lecture?.video?.url}
-                      
                         controlsList='nodownload nofullscreen noremoteplayback'
                         disablePictureInPicture
                         disableRemotePlayback
 
                       />
                     </Box>
+
 
                     <Text m={'3'} fontSize={'15'}>
                       #{index + 1} {lecture.title.slice(0, 30)}
@@ -155,10 +153,7 @@ const CoursePage = ({ user }) => {
           ) : (
             <Loader />
           )}
-
           <>
-
-
           </>
         </Grid>
       </>

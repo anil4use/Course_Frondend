@@ -169,19 +169,19 @@ export const UserReducer = createReducer({}, {
         state.loading = false;
         state.error = action.payload;
     },
-    ///AddLectures
+    ///add comments
     AddCommetsRequest: (state) => {
         state.loading = true;
     },
     AddCommetsSuccuss: (state, action) => {
         state.loading = false;
-        state.comments = action.payload
+        state.message = action.payload
     },
     AddCommetsFail: (state, action) => {
         state.loading = false;
         state.error = action.payload;
     },
-
+ 
 
     cleareError: (state) => {
         state.error = null;

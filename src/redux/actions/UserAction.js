@@ -124,7 +124,7 @@ export const UpdatePassword = (oldPassword, newPassword) => async dispatch => {
     } catch (error) {
         dispatch({ type: 'UpdatePasswordFail', payload: error.response.data.message })
     }
-}               
+}
 ////// forgetpassword
 
 export const forgetPassward = email => async dispatch => {
@@ -142,14 +142,14 @@ export const forgetPassward = email => async dispatch => {
     } catch (error) {
         dispatch({ type: 'ForgetPasswordFail', payload: error.response.data.message })
     }
-}    
+}
 
 ////// contact with us
 
-export const ContactWithUs = (name, email, desc ) => async dispatch => {
+export const ContactWithUs = (name, email, desc) => async dispatch => {
     try {
         dispatch({ type: "ContactUsRequest" });
-        const { data } = await axios.post(`${server}/contect `, {name, email, desc }, {
+        const { data } = await axios.post(`${server}/contect `, { name, email, desc }, {
             headers: {
                 // Accept: "application/json",
                 'Content-type': 'application/json',
@@ -161,10 +161,10 @@ export const ContactWithUs = (name, email, desc ) => async dispatch => {
     } catch (error) {
         dispatch({ type: 'ContactUsFail', payload: error.response.data.message })
     }
-}               
+}
 ////// resetpassword
 
-export const ResetPassword = (token,password) => async dispatch => {
+export const ResetPassword = (token, password) => async dispatch => {
     try {
         dispatch({ type: "ResetPasswordRequest" });
         const { data } = await axios.put(`${server}/resetepassword/${token} `, password, {
@@ -179,7 +179,7 @@ export const ResetPassword = (token,password) => async dispatch => {
     } catch (error) {
         dispatch({ type: 'ResetPasswordFail', payload: error.response.data.message })
     }
-}  
+}
 
 
 ///Delete Course admin
@@ -197,12 +197,15 @@ export const DeleteCourseAdmin = (id) => async dispatch => {
     }
 }
 
-///  get commtes
-export const AddCommetsAction = (id,courseId,lecturesId) => async dispatch => {
+///  add commtes
+export const AddCommetsAction = (text, userId, lectureId,courseId) => async dispatch => {
     try {
         dispatch({ type: "AddCommetsRequest" });
-        const { data } = await axios.post(`${server}/comments/${id}?courseId=${courseId}&lecturesId=${lecturesId}`, {
-
+        const { data } = await axios.post(`${server}/comments`, { text ,userId,lectureId,courseId}, {
+            headers: {
+                Accept: "application/json",
+                'Content-type': 'application/json',
+            },
             withCredentials: true
         });
 
@@ -211,3 +214,32 @@ export const AddCommetsAction = (id,courseId,lecturesId) => async dispatch => {
         dispatch({ type: 'AddCommetsFail', payload: error.response.data.message })
     }
 }
+
+///  get commtes
+export const    getCommetsAction = () => async dispatch => {
+    try {
+        dispatch({ type: "getCommetsRequest" });
+        const { data } = await axios.get(`${server}/comments`, {
+
+            withCredentials: true
+        });
+
+        dispatch({ type: 'getCommetsSuccuss', payload: data })
+    } catch (error) {
+        dispatch({ type: 'getCommetsFail', payload: error.response.data.message })
+    } 
+}
+// ///get All users
+// export const GetAllUsersAdmin = () => async dispatch => {
+//     try {
+//         dispatch({ type: "GetAllUsersRequest" });
+//         const { data } = await axios.get(`${server}/admin/getAllUsers `, {
+
+//             withCredentials: true
+//         });
+
+//         dispatch({ type: 'GetAllUsersSuccuss', payload: data.users })
+//     } catch (error) {
+//         dispatch({ type: 'GetAllUsersFail', payload: error.response.data.message })
+//     }
+// }
