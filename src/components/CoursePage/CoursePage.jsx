@@ -1,12 +1,13 @@
 
 // export default CoursePage;
-import { Avatar, Box, Button, Collapse, Grid, HStack, Heading, Text, Textarea, VStack } from '@chakra-ui/react';
+import { Avatar, Box, Button, Collapse, FormLabel, Grid, HStack, Heading, Text, Textarea, VStack } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCourseLacture } from '../../redux/actions/CourseAction';
 import { useParams, Navigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Loader from '../Layout/Loader';
+import "../Home/home.css"
 import { AddCommetsAction, getCommetsAction } from '../../redux/actions/UserAction';
 
 const CoursePage = ({ user }) => {
@@ -84,11 +85,13 @@ const CoursePage = ({ user }) => {
                   <Box maxW="full" mx="auto" p={4}>
                     <form onSubmit={handleSubmit}>
                       <VStack spacing={4} align="start">
+                        <FormLabel>Add comment</FormLabel>
                         <Textarea
-
-                          value={addcommet}
+                          mt={'4'}
                           onChange={(e) => setaddcommet(e.target.value)}
-                          placeholder="Enter a value"
+                          placeholder="Enter your comment"
+                          minLength={'4'}
+                          maxLength={'80'}
                           required
                         />
                         <Button type="submit">Submit</Button>
@@ -96,30 +99,31 @@ const CoursePage = ({ user }) => {
                     </form>
                   </Box>
                   {
+
                     console.log(lectures[lectureNumber]?.comments.map((e) => (
                       e.text
                     )))
                   }
+                  <Box >
+                    {
+                      lectures && lectures[lectureNumber]?.comments.map((e,i) => (
 
-                  {
-                    lectures && lectures[lectureNumber]?.comments.map((e) => (
-                      <Box bg={'blackAlpha.100'} borderRadius={'2xl'} h={'20'} m={'4'} alignItems={'center'} textAlign={'center'} gap={'20'} justifyContent={'flex-start'} display={'flex'}>
-                        <HStack ml={'3'}>
-                          <Avatar />
-                          <Text>{e.username}</Text>
-                        </HStack>
-                        <Text> {e.text}</Text>
-                        <Text position={'static'}>{e.timestamp.slice(0,24)}</Text>
-                      </Box>
-                    ))
-
-
-                  }
-
+                        <Box borderRadius={'2xl'} h={'max-content'} m={'4'} alignItems={'center'} textAlign={'center'} gap={'10'} justifyContent={'flex-start'}>
+                          <HStack ml={'3'}>
+                            <Avatar mt={'4'} src={e.useravatar} />
+                            <Text fontWeight={'bold'} fontSize={'14'}>{e.username}</Text>
+                            <Text  >{e.timestamp.toLocaleString()}</Text>
+                          </HStack>
+                          <Text display={'flex'} m={'4'} fontSize={'14'} fontStyle={'inherit'}> {e.text}</Text>
+                          <Box mt={'4'} borderRadius={'2xl'} border={'1px solid gray'}>
+                          </Box>
+                    
+                        </Box>)
+                      )
+                    }
+                  </Box>
                 </Collapse>
-
               </Box>
-
               <VStack >
                 {lectures.map((lecture, index) => (
                   <Box borderRadius={'md'} border={'medium'}
