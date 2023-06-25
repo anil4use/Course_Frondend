@@ -1,6 +1,18 @@
 
 // export default CoursePage;
-import { Avatar, Box, Button, Collapse, FormLabel, Grid, HStack, Heading, Text, Textarea, VStack } from '@chakra-ui/react';
+import {
+  Avatar,
+  Box,
+  Button,
+  Collapse,
+  FormLabel,
+  Grid,
+  HStack,
+  Heading,
+  Text,
+  Textarea,
+  VStack
+} from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCourseLacture } from '../../redux/actions/CourseAction';
@@ -61,15 +73,18 @@ const CoursePage = ({ user }) => {
         <Grid minH={'90vh'} templateColumns={['1fr', '3fr 1fr']}>
           {lectures && lectures.length > 0 ? (
             <>
-              <Box m={'4'}>
-                <video
-                  width={'100%'}
-                  controls
-                  controlsList="nodownload noremoteplayback"
-                  disablePictureInPicture
-                  disableRemotePlayback
-                  src={lectures[lectureNumber]?.video?.url}
-                />
+              <Box m={'4'} >
+                <Box m={'4'} borderRadius={'md'} border={'1px solid gray'}>
+                  <video
+                    width={'100%'}
+                    controls
+                    controlsList="nodownload noremoteplayback"
+                    disablePictureInPicture
+                    disableRemotePlayback
+                    src={lectures[lectureNumber]?.video?.url}
+                  />
+                </Box>
+
                 <Heading fontSize={'22'}>
                   #{lectureNumber + 1} {lectures[lectureNumber]?.title}
                 </Heading>
@@ -81,48 +96,46 @@ const CoursePage = ({ user }) => {
                   {lectures[lectureNumber]?.descripaton}
                   <Box mt={'4'} borderRadius={'2xl'} border={'2px solid gray'}>
                   </Box>
-
-                  <Box maxW="full" mx="auto" p={4}>
-                    <form onSubmit={handleSubmit}>
-                      <VStack spacing={4} align="start">
-                        <FormLabel>Add comment</FormLabel>
-                        <Textarea
-                          mt={'4'}
-                          onChange={(e) => setaddcommet(e.target.value)}
-                          placeholder="Enter your comment"
-                          minLength={'4'}
-                          maxLength={'80'}
-                          required
-                        />
-                        <Button type="submit">Submit</Button>
-                      </VStack>
-                    </form>
-                  </Box>
-                  {
-
-                    console.log(lectures[lectureNumber]?.comments.map((e) => (
-                      e.text
-                    )))
-                  }
-                  <Box >
-                    {
-                      lectures && lectures[lectureNumber]?.comments.map((e,i) => (
-
-                        <Box borderRadius={'2xl'} h={'max-content'} m={'4'} alignItems={'center'} textAlign={'center'} gap={'10'} justifyContent={'flex-start'}>
-                          <HStack ml={'3'}>
-                            <Avatar mt={'4'} src={e.useravatar} />
-                            <Text fontWeight={'bold'} fontSize={'14'}>{e.username}</Text>
-                            <Text  >{e.timestamp.toLocaleString()}</Text>
-                          </HStack>
-                          <Text display={'flex'} m={'4'} fontSize={'14'} fontStyle={'inherit'}> {e.text}</Text>
-                          <Box mt={'4'} borderRadius={'2xl'} border={'1px solid gray'}>
-                          </Box>
-                    
-                        </Box>)
-                      )
-                    }
-                  </Box>
                 </Collapse>
+
+                <Box maxW="full" mx="auto" p={4}>
+                  <form onSubmit={handleSubmit}>
+                    <VStack spacing={4} align="start">
+                      <FormLabel>Add comment</FormLabel>
+                      <Textarea
+                        mt={'4'}
+                        onChange={(e) => setaddcommet(e.target.value)}
+                        placeholder="Enter your comment"
+                        minLength={'4'}
+                        maxLength={'80'}
+                        required
+                      />
+                      <Button type="submit">Submit</Button>
+                    </VStack>
+                  </form>
+                </Box>
+                {
+                  console.log(lectures[lectureNumber]?.comments.map((e) => (
+                    e.text
+                  )))
+                }
+                <Box >
+                  {
+                    lectures && lectures[lectureNumber]?.comments.map((e, i) => (
+
+                      <Box borderRadius={'2xl'} h={'max-content'} m={'4'} alignItems={'center'} textAlign={'center'} gap={'10'} justifyContent={'flex-start'}>
+                        <HStack ml={'3'}>
+                          <Avatar mt={'4'} src={e.useravatar} />
+                          <Text fontWeight={'bold'} fontSize={'14'}>{e.username}</Text>
+                          <Text  >{e.timestamp.toLocaleString()}</Text>
+                        </HStack>
+                        <Text display={'flex'} m={'4'} fontSize={'14'} fontStyle={'inherit'}> {e.text}</Text>
+                        <Box mt={'4'} borderRadius={'2xl'} border={'0.1px solid black'}>
+                        </Box>
+                      </Box>)
+                    )
+                  }
+                </Box>
               </Box>
               <VStack >
                 {lectures.map((lecture, index) => (
@@ -140,11 +153,8 @@ const CoursePage = ({ user }) => {
                         controlsList='nodownload nofullscreen noremoteplayback'
                         disablePictureInPicture
                         disableRemotePlayback
-
                       />
                     </Box>
-
-
                     <Text m={'3'} fontSize={'15'}>
                       #{index + 1} {lecture.title.slice(0, 30)}
 
