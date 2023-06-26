@@ -84,20 +84,22 @@ const CoursePage = ({ user }) => {
                     src={lectures[lectureNumber]?.video?.url}
                   />
                 </Box>
+                <VStack></VStack>
+                <Box p={'4'}>
+                  <Heading fontSize={'22'}>
+                    #{lectureNumber + 1} {lectures[lectureNumber]?.title}
+                  </Heading>
+                  <Heading fontSize={'24'}>Description ---</Heading>
+                  <Button size='sm' onClick={handleToggle} mt='1rem'>
+                    Show {show ? 'Less' : 'More'}
+                  </Button>
+                  <Collapse startingHeight={20} in={show}>
+                    {lectures[lectureNumber]?.descripaton}
+                    <Box mt={'4'} borderRadius={'2xl'} border={'2px solid gray'}>
+                    </Box>
+                  </Collapse>
 
-                <Heading fontSize={'22'}>
-                  #{lectureNumber + 1} {lectures[lectureNumber]?.title}
-                </Heading>
-                <Heading fontSize={'24'}>Description ---</Heading>
-                <Button size='sm' onClick={handleToggle} mt='1rem'>
-                  Show {show ? 'Less' : 'More'}
-                </Button>
-                <Collapse startingHeight={20} in={show}>
-                  {lectures[lectureNumber]?.descripaton}
-                  <Box mt={'4'} borderRadius={'2xl'} border={'2px solid gray'}>
-                  </Box>
-                </Collapse>
-
+                </Box>
                 <Box maxW="full" mx="auto" p={4}>
                   <form onSubmit={handleSubmit}>
                     <VStack spacing={4} align="start">
@@ -119,24 +121,28 @@ const CoursePage = ({ user }) => {
                     e.text
                   )))
                 }
-                <Box >
-                  {
-                    lectures && lectures[lectureNumber]?.comments.map((e, i) => (
+                <Collapse startingHeight={20} in={show}>
+                  <Box >
+                    {
+                      lectures && lectures[lectureNumber]?.comments.map((e, i) => (
 
-                      <Box borderRadius={'2xl'} h={'max-content'} m={'4'} alignItems={'center'} textAlign={'center'} gap={'10'} justifyContent={'flex-start'}>
-                        <HStack ml={'3'}>
-                          <Avatar mt={'4'} src={e.useravatar} />
-                          <Text fontWeight={'bold'} fontSize={'14'}>{e.username}</Text>
-                          <Text  >{e.timestamp.toLocaleString()}</Text>
-                        </HStack>
-                        <Text display={'flex'} m={'4'} fontSize={'14'} fontStyle={'inherit'}> {e.text}</Text>
-                        <Box mt={'4'} borderRadius={'2xl'} border={'0.1px solid black'}>
-                        </Box>
-                      </Box>)
-                    )
-                  }
-                </Box>
+                        <Box borderRadius={'2xl'} h={'max-content'} m={'4'} alignItems={'center'} textAlign={'center'} gap={'10'} justifyContent={'flex-start'}>
+                          <HStack textAlign={'center'} ml={'3'}>
+                            <Avatar border={'2px solid gray'} mt={'4'} src={e.useravatar} />
+                            <Text fontWeight={'bold'} fontSize={'14'}>{e.username}</Text>
+                            <Text  >{e.timestamp.toLocaleString()}</Text>
+                          </HStack>
+                          <Text display={'flex'} m={'4'} fontSize={'14'} fontStyle={'inherit'}> {e.text}</Text>
+                          <Box mt={'4'} borderRadius={'2xl'} border={'0.1px solid black'}>
+                          </Box>
+                        </Box>)
+                      )
+                    }
+                  </Box>
+                </Collapse>
+
               </Box>
+
               <VStack >
                 {lectures.map((lecture, index) => (
                   <Box borderRadius={'md'} border={'medium'}
@@ -165,7 +171,7 @@ const CoursePage = ({ user }) => {
               <br />
             </>
           ) : (
-            <Loader />
+            <Heading mt={'5'}  textAlign={['center','left']} children={'No lecture found'} />
           )}
           <>
           </>

@@ -49,7 +49,7 @@ const Header = ({ isAuthenticated, user }) => {
 
             <Button  colorScheme={'linkedin'} width={'12'} height={'12'} rounded={'full'}
                 top={'3'} left={'4'} position={'fixed'} onClick={onOpen}>
-                <GrMenu />
+                <GrMenu opacity={'1'} />
             </Button>
             <Drawer
                 isOpen={isOpen}

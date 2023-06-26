@@ -1,5 +1,5 @@
 import {
-  
+
   Button,
   Card,
   CardBody,
@@ -27,11 +27,11 @@ const Course = () => {
 
   const Courese = ({ title, loading, CreatedBY, desc, views, lectures, id, imgSrc }) => {
     return (
-      <GridItem className='Course' m={'auto'}  mt={'4'}>
-        <Card maxW='72'>
+      <GridItem  className='Course' m={'auto'} ml={['5','0']} mt={'4'}>
+        <Card  maxW='72'>
           <CardBody>
             <Image
-              src={imgSrc}
+              h={'10rem'} src={imgSrc}
               alt='Course Poster'
               borderRadius='lg'
             />
@@ -99,48 +99,48 @@ const Course = () => {
   }, [category, keyword, dispatch]);
 
 
-  
+
   return (
     <>
       <Container maxh={'95vh'} maxW={'container.lg'} paddingY={'8'}>
         <Heading m={'4'} textAlign={'center'}>
-          All course
+          All courses
         </Heading>
-        <Input type='text' value={keyword} onChange={e => setKeyword(e.target.value)} m={'1'} placeholder='Search Courses' size={'lg'} />
-        <HStack value={category} className='category_hide' mt={'4'} justifyContent={['center']} overflow={'auto'} textAlign={['start']}>
+        <Input  type='text' value={keyword} onChange={e => setKeyword(e.target.value)} m={'1'} placeholder='Search Courses' size={'lg'} />
+        <HStack ml={'3'} value={category} className='category_hide' mt={'4'} justifyContent={['center']} overflow={'auto'} textAlign={['start']}>
           {categories.map((cat, i) => (
             <Button key={i} onClick={() => Setcategory(cat)} minW={'60'}>
               <Text>{cat}</Text>
             </Button>
           ))}
         </HStack>
-          <Grid justifyContent={["", 'flex-start']} alignItems={['', 'flex-start']} mt={'4'} templateColumns={['repeat(1,1fr)', 'repeat(3,1fr)']} gap={4}>
-            {courses && courses.length > 0 ? (
-              courses.map(e => (
-                <Courese
-                  key={e._id}
-                  title={e.title}
-                  views={e.views}
-                  desc={e.descripaton}
-                  id={e._id}
-                  imgSrc={e.poster.url}
-                  lectures={e.NumberofVideos}
-                  CreatedBY={e.createBY}
-                  loading={loading}
-                //   addToPlayListHandler={addToPlayListHandler}
-                />
-              ))
-            ) : (
-              <Heading mt={'20'} minH={'60vh'}>
-                Course Not Found
-              </Heading>
-            )}
-          </Grid>
+        <Grid justifyContent={["", 'flex-start']} alignItems={['', 'flex-start']} mt={'4'} templateColumns={['repeat(1,1fr)', 'repeat(3,1fr)']} gap={4}>
+          {courses && courses.length > 0 ? (
+            courses.map(e => (
+              <Courese
+                key={e._id}
+                title={e.title}
+                views={e.views}
+                desc={e.descripaton}
+                id={e._id}
+                imgSrc={e.poster.url}
+                lectures={e.NumberofVideos}
+                CreatedBY={e.createBY}
+                loading={loading}
+              //   addToPlayListHandler={addToPlayListHandler}
+              />
+            ))
+          ) : (
+            <Heading mt={'20'} minH={'60vh'}>
+              Course Not Found
+            </Heading>
+          )}
+        </Grid>
 
 
 
-   
-  
+
+
       </Container>
     </>
   );
