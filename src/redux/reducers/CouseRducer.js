@@ -13,7 +13,7 @@ export const CourseReducer = createReducer({ courses: [], lectures: [] }, {
         state.loading = false;
         state.error = action.payload;
     },
- 
+
     ///only subscriber watch lecture
     getCourseRequest: (state) => {
         state.loadingg = true;
@@ -28,34 +28,23 @@ export const CourseReducer = createReducer({ courses: [], lectures: [] }, {
     },
 
 
-    ///// add to play list
-
-
-    AddToPlayListRequest: (state) => {
+    /// ad to watchlist
+    AdToWatchlistRequest: (state) => {
         state.loading = true;
     },
-    AddToPlayListSuccuss: (state, action) => {
+    AdToWatchlistSuccuss: (state, action) => {
         state.loading = false;
         state.message = action.payload;
     },
-    AddToPlayListFail: (state, action) => {
+    AdToWatchlistFail: (state, action) => {
         state.loading = false;
         state.error = action.payload;
     },
 
-    ///// remove from list
 
-    RemoveFromPlayListRequest: (state) => {
-        state.loading = true;
-    },
-    RemoveFromPlayListSuccuss: (state, action) => {
-        state.loading = false;
-        state.message = action.payload;
-    },
-    RemoveFromPlayListFail: (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-    },
+ 
+ 
+
     ///        RequestCourse list
 
 

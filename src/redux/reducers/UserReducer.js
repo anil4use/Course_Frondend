@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-export const UserReducer = createReducer({}, {
+export const UserReducer = createReducer({playlist:[]}, {
     ///login user
     loginRequest: (state) => {
         state.loading = true;
@@ -181,6 +181,20 @@ export const UserReducer = createReducer({}, {
         state.loading = false;
         state.error = action.payload;
     },
+ 
+    ///remove to watchlist
+    RemoveFromWatchlistRequest: (state) => {
+        state.loading = true;
+    },
+    RemoveFromWatchlistSuccuss: (state, action) => {
+        state.loading = false;
+        state.message = action.payload
+    },
+    RemoveFromWatchlistFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+ 
  
 
     cleareError: (state) => {

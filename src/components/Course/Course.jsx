@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllCourse } from '../../redux/actions/CourseAction';
 import { toast } from 'react-hot-toast';
 import "../Home/home.css"
+import { AddToWatchList, LoadUser } from '../../redux/actions/UserAction';
 
 const Course = () => {
   const { error, message, courses, loading } = useSelector(state => state.course);
@@ -51,9 +52,9 @@ const Course = () => {
           </CardBody>
           <Divider />
           <CardFooter>
-            {/* <Button isLoading={loading} onClick={() => addToPlayListHandler(id)} variant={'outline'} colorScheme='linkedin' mr={'2'}>
+            <Button isLoading={loading} onClick={() => addToPlayListHandler(id)} variant={'outline'} colorScheme='linkedin' mr={'2'}>
                 Add To Play list
-              </Button> */}
+              </Button>
             <Link to={`/course/${id}`}>
               <Button isLoading={loading} color={'linkedin.300'} variant={'solid'}>
                 Watch Now
@@ -69,16 +70,7 @@ const Course = () => {
   const [category, Setcategory] = useState('');
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      dispatch({ type: 'cleareError' });
-    }
-    if (message) {
-      toast.success(message);
-      dispatch({ type: 'clearMessagge' });
-    }
-  }, [error, message, dispatch]);
+ 
 
   const categories = [
     // 'web dovlopment',
@@ -89,16 +81,38 @@ const Course = () => {
     'Web Development',
     'Machine Learning',
   ];
+  const { error:e, message:m } = useSelector(state => state.user);
 
-  // const addToPlayListHandler = CourseID => {
-  //   dispatch(AddToPlayList(CourseID));
-  // };
+  const addToPlayListHandler = id => {
+    dispatch(AddToWatchList(id));
+    dispatch(LoadUser())
+    // console.log(id)
 
+  };
+  useEffect(() => {
+    if (e) {
+      toast.error(e);
+      dispatch({ type: 'cleareError' });
+    }
+    if (m) {
+      toast.success(m);
+      dispatch({ type: 'clearMessagge' });
+    }
+  }, [e, m, dispatch]);
   useEffect(() => {
     dispatch(getAllCourse(category, keyword));
   }, [category, keyword, dispatch]);
 
-
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: 'cleareError' });
+    }
+    if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessagge' });
+    }
+  }, [error, message, dispatch]);
 
   return (
     <>
@@ -127,7 +141,7 @@ const Course = () => {
                 lectures={e.NumberofVideos}
                 CreatedBY={e.createBY}
                 loading={loading}
-              //   addToPlayListHandler={addToPlayListHandler}
+                addToPlayListHandler={addToPlayListHandler}
               />
             ))
           ) : (
@@ -136,11 +150,6 @@ const Course = () => {
             </Heading>
           )}
         </Grid>
-
-
-
-
-
       </Container>
     </>
   );

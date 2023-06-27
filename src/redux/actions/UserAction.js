@@ -229,17 +229,31 @@ export const    getCommetsAction = () => async dispatch => {
         dispatch({ type: 'getCommetsFail', payload: error.response.data.message })
     } 
 }
-// ///get All users
-// export const GetAllUsersAdmin = () => async dispatch => {
-//     try {
-//         dispatch({ type: "GetAllUsersRequest" });
-//         const { data } = await axios.get(`${server}/admin/getAllUsers `, {
+///  Add to watch list
+export const    AddToWatchList = (id) => async dispatch => {
+    try {
+        dispatch({ type: "AdToWatchlistRequest" });
+        const { data } = await axios.post(`${server}/addtoplaylist`,{id}, {
 
-//             withCredentials: true
-//         });
+            withCredentials: true
+        });
 
-//         dispatch({ type: 'GetAllUsersSuccuss', payload: data.users })
-//     } catch (error) {
-//         dispatch({ type: 'GetAllUsersFail', payload: error.response.data.message })
-//     }
-// }
+        dispatch({ type: 'AdToWatchlistSuccuss', payload: data.message })
+    } catch (error) {
+        dispatch({ type: 'AdToWatchlistFail', payload: error.response.data.message })
+    } 
+}
+///  Remove watch list
+export const    RemoveFromWatchList = (id) => async dispatch => {
+    try {
+        dispatch({ type: "RemoveFromWatchlistRequest" });
+        const { data } = await axios.delete(`${server}/removeplaylist?id=${id}`, {
+
+            withCredentials: true
+        });
+
+        dispatch({ type: 'RemoveFromWatchlistSuccuss', payload: data.message })
+    } catch (error) {
+        dispatch({ type: 'RemoveFromWatchlistFail', payload: error.response.data.message })
+    } 
+}

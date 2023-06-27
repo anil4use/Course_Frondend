@@ -25,14 +25,30 @@ import {
 
 } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
-import { LoadUser, UpdateProfilePhoto } from '../../redux/actions/UserAction'
+import { LoadUser, RemoveFromWatchList, UpdateProfilePhoto } from '../../redux/actions/UserAction'
 import { CancelSubscription } from '../../redux/actions/SubscriptionAction'
 import { toast } from 'react-hot-toast'
 const Profile = () => {
   const dispatch = useDispatch();
-  const {  user } = useSelector(state => state.user)
+  const { user } = useSelector(state => state.user)
 
   const { message, error, loading } = useSelector(state => state.payment)
+  // const { message, error, loading } = useSelector(state => state.payment)
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  // if (!user.avatar ) {
+  //   return <h1>h</h1>; 
+  // }
+
+  const RemovePlaylistHandler = (id) => {
+    dispatch(RemoveFromWatchList(id))
+    dispatch(LoadUser())
+    // console.log(id)
+  }
+
+  const CencerHandler = () => {
+    dispatch(CancelSubscription())
+  }
   useEffect(() => {
     if (error) {
       toast.error(error)
@@ -42,27 +58,16 @@ const Profile = () => {
       toast.success(message)
       dispatch({ type: 'clearMessagge' })
     }
-    
+
   },
     [dispatch, error, message]);
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  // if (!user.avatar ) {
-  //   return <h1>h</h1>; 
-  // }
-  if (!user.avatar) {
-    return (<Avatar />)
-  };
-  const RemovePlaylistHandler = () => {
-    console.log("re")
-  }
   const changeImgeSumbit = (e, image) => {
     e.preventDefault()
     console.log(image)
   }
-  const CencerHandler = () => {
-    dispatch(CancelSubscription())
-  }
-
+  if (!user.avatar) {
+    return (<Avatar />)
+  };
   return (
     <>
       <Container minH={'95vh'} maxW={'container.md'}>
@@ -120,9 +125,9 @@ const Profile = () => {
               {
                 user.playlist.map((e) => (
                   <VStack w={'48'} m='2' key={e.course}>
-                    <Link to={`/course/${e.course}`}><Image boxSize={'full'} objectFit={'contain'} src={e.poster}></Image></Link>
+                    <Link to={`/course/${e.course}`}><Image border={'1px solid gray'} h={'7rem'} src={e.poster}></Image></Link>
                     <HStack m={'1'}><Link to={`/course/${e.course}`}><Button variant={'outline'} colorScheme='linkedin'>Watch Now</Button></Link>
-                      <Button onClick={RemovePlaylistHandler} color={'red'} variant={'ghost'}><AiFillDelete /></Button>
+                      <Button onClick={() => RemovePlaylistHandler(e.course)} color={'red'} variant={'ghost'}><AiFillDelete /></Button>
                     </HStack>
                   </VStack>
                 ))
@@ -133,6 +138,7 @@ const Profile = () => {
         {
           user.playlist.length > 0 ? ("") : (<><Link to={'/course'}><Button variant={'outline'} mb={'2'} color={'linkedin.400'}>Add playlist</Button></Link></>)
         }
+        <br />
       </Container>
       <InitialFocus changeImgeSumbit={changeImgeSumbit} isOpen={isOpen} onClose={onClose} />
     </>

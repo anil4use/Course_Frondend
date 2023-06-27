@@ -86,10 +86,11 @@ const CoursePage = ({ user }) => {
                 </Box>
                 <VStack></VStack>
                 <Box p={'4'}>
-                  <Heading fontSize={'22'}>
+                  <Heading  fontSize={'18'}>
                     #{lectureNumber + 1} {lectures[lectureNumber]?.title}
+                    lkjsfoidhn kljdsoifj sdkfjsdfj jjjjj lksjfdksdjf kljhfljsdkljf lkjdfs
                   </Heading>
-                  <Heading fontSize={'24'}>Description ---</Heading>
+                  <Heading mt={'4'} fontSize={'22'}>Description ---</Heading>
                   <Button size='sm' onClick={handleToggle} mt='1rem'>
                     Show {show ? 'Less' : 'More'}
                   </Button>

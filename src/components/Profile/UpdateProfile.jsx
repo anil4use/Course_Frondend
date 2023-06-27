@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { LoadUser, UpdateUser } from '../../redux/actions/UserAction'
+import {  LoadUser, UpdateUser } from '../../redux/actions/UserAction'
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-hot-toast';
 const UpdateProfile = () => {
