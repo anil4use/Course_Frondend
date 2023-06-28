@@ -38,7 +38,7 @@ const Login = () => {
                 align={'center'}
                 justify={'center'}
                 bg={useColorModeValue('white', 'gray.800')}>
-                <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+                <Stack w={['96','sm']} spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                     <Stack align={'center'}>
                         <Heading fontSize={'4xl'}>Sign in to your account</Heading>
                         <Text fontSize={'lg'} color={'gray.600'}>

@@ -50,13 +50,13 @@ const Contact = () => {
                 align={'center'}
                 justify={'center'}
                 bg={useColorModeValue('white', 'gray.800')}>
-                <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-                    <Stack w={'sm'} align={'center'}>
+                <Stack w={['96','sm']} spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+                    <Stack align={'center'}>
                         <Heading fontSize={'4xl'} textAlign={'center'}>
-                            Contact us
+                            Contact with us
                         </Heading>
-                        <Text fontSize={'lg'} color={'gray.600'}>
-                            {/* to enjoy all of our cool features ✌️ */}
+                        <Text fontSize={'lg'}  color={'gray.600'}>
+                            to enjoy all of our cool features ✌️
                         </Text>
                     </Stack>
                     <Box

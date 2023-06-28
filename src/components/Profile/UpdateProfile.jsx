@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {  LoadUser, UpdateUser } from '../../redux/actions/UserAction'
+import { LoadUser, UpdateUser } from '../../redux/actions/UserAction'
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-hot-toast';
 
@@ -41,7 +41,7 @@ const UpdateProfile = () => {
         }
     },
         [dispatch, error, message]);
-        const isError = Input === ''
+    const isError = Input === ''
 
     return (
         <>
@@ -50,7 +50,7 @@ const UpdateProfile = () => {
                 align={'center'}
                 justify={'center'}
                 bg={useColorModeValue('white', 'gray.800')}>
-                <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+                <Stack w={['96', 'sm']} spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                     <Stack w={'sm'} align={'center'}>
                         <Heading fontSize={'4xl'} textAlign={'center'}>
                             Update Profile
@@ -72,13 +72,13 @@ const UpdateProfile = () => {
                                 </FormControl>
                                 <FormControl isInvalid={isError} id="email" isRequired>
                                     <FormLabel>Email address</FormLabel>
-                                    <Input type='email' value={email}  onChange={e => Setemail(e.target.value)}/>
+                                    <Input type='email' value={email} onChange={e => Setemail(e.target.value)} />
                                     {!isError ? (
                                         <></>
                                     ) : (
                                         <FormErrorMessage>Email is required.</FormErrorMessage>
                                     )}
-                                </FormControl>                            
+                                </FormControl>
                                 <Stack mt={'3'} spacing={10} pt={2}>
                                     <Button
                                         loadingText="Submitting"
@@ -88,9 +88,9 @@ const UpdateProfile = () => {
                                             bg: 'gray.200',
                                         }}
                                         type={'submit'}>
-                                         Save Changes
+                                        Save Changes
                                     </Button>
-                                </Stack>                       
+                                </Stack>
                             </form>
                         </Stack>
                     </Box>
