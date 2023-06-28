@@ -7,6 +7,7 @@ import { server } from '../../redux/Store';
 import { toast } from 'react-hot-toast';
 import logo from '../../assets/imges/logo.png';
 
+
 const Subscribe = ({ user }) => {
     const { subscriptionId, error, loading, message } = useSelector(state => state.payment);
     const { error: courseerror, message: coursemesssage } = useSelector(state => state.course);
@@ -78,8 +79,9 @@ const Subscribe = ({ user }) => {
                         <Text bg={'linkedin.200'} textAlign={'center'}>
                             Pay Pack --299
                         </Text>
-                        <Text h={'32'} m={'4'}>
-                            Pay to Hotstar using React.js and Chakra UI, you'll need to follow these steps:
+                        <Text h={'32'} fontSize={'20'} m={'4'}>
+                            Learn from Experts . One time Subscription & life time Access.
+
                         </Text>
                         <Text fontWeight={'bold'} fontSize={'2xl'} textAlign={'center'}>
                             Only --299 ₹
@@ -89,6 +91,7 @@ const Subscribe = ({ user }) => {
                                 Pay Now
                             </Button>{' '}
                         </Text>
+                        {/* <Link to={'/paymentfailed'}>cenrer</Link> */}
                         <Text color={'yellow.300'} fontSize={'14'} mt={'4'} textTransform={'uppercase'}>
                             100% REFUND after Cancellation
                         </Text>
