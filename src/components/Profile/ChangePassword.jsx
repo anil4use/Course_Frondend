@@ -1,10 +1,26 @@
-import { Box, Button, Container, FormControl, FormLabel, Heading, Input, Stack, } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  FormControl,
+  useColorModeValue,
+  FormLabel,
+  Heading,
+  Input,
+  InputGroup,
+  Stack,
+  Flex,
+  Text,
+  InputRightElement,
+} from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { UpdatePassword } from '../../redux/actions/UserAction'
 import { useNavigate } from "react-router-dom";
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 const ChangePassword = () => {
   const [oldPassword, SetoldPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false);
+
   const [newPassword, SetnewPassword] = useState("")
   const navigate = useNavigate()
   const dispatch = useDispatch();
@@ -15,24 +31,72 @@ const ChangePassword = () => {
   };
   return (
     <>
-      <Container p={'7'} h={'95vh'}>
-        <Heading textAlign={'center'}>Change Password</Heading>
-        <Box>
-          <form onSubmit={sumbitHandler}>
-       <FormControl>
-              <Stack spacing={'4'} justifyContent={'center '} h={'400'} >
-                <FormLabel>Inter Your Old Password</FormLabel>
-                <Input focusBorderColor='linkedin.400' value={oldPassword} onChange={e => SetoldPassword(e.target.value)} />
-                <FormLabel>Inter Your New Password</FormLabel>
-                <Input focusBorderColor='linkedin.400' value={newPassword} onChange={e => SetnewPassword(e.target.value)} />
-                <Button type='submit' color={'linkedin.300'} variant={'solid'}>Save Changes</Button>
-              </Stack>
-
-            </FormControl>
-          </form>
-        </Box>
-
-      </Container>
+      <Flex
+        minH={'100vh'}
+        align={'center'}
+        justify={'center'}
+        bg={useColorModeValue('white', 'gray.800')}>
+        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+          <Stack align={'center'}>
+            <Heading w={'sm'} textAlign={'center'} fontSize={'4xl'}>Change  Password</Heading>
+            <Text fontSize={'lg'} color={'gray.600'}>
+              {/* to enjoy all of our cool features ✌️ */}
+            </Text>
+          </Stack>
+          <Box
+            rounded={'lg'}
+            bg={useColorModeValue('white', 'gray.700')}
+            boxShadow={'lg'}
+            p={8}>
+            <Stack spacing={4}>
+              <form onSubmit={sumbitHandler}>
+                <FormControl id="password" isRequired>
+                  <FormLabel>Inter Your Old Password</FormLabel>
+                  <InputGroup>
+                    <Input type={showPassword ? 'text' : 'password'} value={oldPassword} onChange={e => SetoldPassword(e.target.value)} />
+                    <InputRightElement h={'full'}>
+                      <Button
+                        variant={'ghost'}
+                        onClick={() =>
+                          setShowPassword((showPassword) => !showPassword)
+                        }>
+                        {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
+                </FormControl>
+                <FormControl id="newpassword" isRequired>
+                  <FormLabel>Inter Your Old Password</FormLabel>
+                  <InputGroup>
+                    <Input type={showPassword ? 'text' : 'password'} value={newPassword} onChange={e => SetnewPassword(e.target.value)} />
+                    <InputRightElement h={'full'}>
+                      <Button
+                        variant={'ghost'}
+                        onClick={() =>
+                          setShowPassword((showPassword) => !showPassword)
+                        }>
+                        {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
+                </FormControl>
+                <Stack mt={'3'} spacing={10} pt={2}>
+                  <Button
+                    loadingText="Submitting"
+                    size="lg"
+                    color={'linkedin.300'} variant={'solid'}
+                    _hover={{
+                      bg: 'gray.200',
+                    }}
+                    type={'submit'}>
+                    Update Password
+                  </Button>
+                </Stack>
+              </form>
+            </Stack>
+          </Box>
+        </Stack>
+      </Flex>
     </>
   )
 }

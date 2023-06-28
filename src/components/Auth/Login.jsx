@@ -50,7 +50,7 @@ const Login = () => {
                         bg={useColorModeValue('white', 'gray.700')}
                         boxShadow={'lg'}
                         p={8}>
-                        <Stack w={'sm'} spacing={4}>
+                        <Stack spacing={4}>
                             <form onSubmit={SumbitHandler}>
                                 <FormControl isInvalid={isError} id="email" isRequired>
                                     <FormLabel>Email address</FormLabel>
